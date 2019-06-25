@@ -1,0 +1,17 @@
+$primary: #4CAF50;
+$primary-disabled: rgba(76, 175, 79, 0.6);
+$accent: #ECEFF1;
+$accent-disabled: #eceff175;
+$warn: #311B92;
+$red-warn: #BF360C;
+$grid-columns: 18;
+$grid-gutter-width: 14px;
+$title-font: "Mali", cursive;
+
+.container {
+    margin-top: 10px;
+}
+
+button, textarea, input {
+    outline: none;
+}

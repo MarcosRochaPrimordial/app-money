@@ -1,0 +1,17 @@
+@import "./../../../../styles-variables.scss";
+$font: 40px;
+$align: center;
+$numbers-font: 'Slabo 27px', serif;
+.index {
+  margin-top: 60px;
+  font-size: $font;
+  text-align: $align;
+  font-family: $numbers-font;
+  font-weight: bolder;
+  .debit {
+    color: $accent;
+  }
+  .credit {
+    color: $warn;
+  }
+}

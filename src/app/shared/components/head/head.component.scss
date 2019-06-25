@@ -1,0 +1,18 @@
+@import "./../../../../styles-variables.scss";
+
+nav {
+  width: 98%;
+  h1 {
+    font-family: $title-font;
+    color: $primary;
+    height: 30px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 36px;
+  }
+  .button-toggle-menu {
+    i {
+      color: $primary;
+    }
+  }
+}
