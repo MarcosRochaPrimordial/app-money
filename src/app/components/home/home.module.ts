@@ -4,10 +4,16 @@ import { HomeRoutingModule } from './home-routing.module';
 import { SummaryComponent } from './summary/summary.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SummaryIndexComponent } from './summary-index/summary-index.component';
-import { SummaryBodyComponent } from './summary-body/summary-body.component';
+import { SummaryChartsComponent } from './summary-charts/summary-charts.component';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
 
 @NgModule({
-  declarations: [SummaryComponent, SummaryIndexComponent, SummaryBodyComponent],
+  declarations: [
+    SummaryComponent,
+    SummaryIndexComponent,
+    SummaryChartsComponent,
+    ExpenseListComponent
+  ],
   imports: [
     HomeRoutingModule,
     SharedModule

@@ -1,4 +1,15 @@
 <div class="index">
   <app-summary-index></app-summary-index>
 </div>
-<app-summary-body></app-summary-body>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Resumo">
+    <ng-template matTabContent>
+      <app-summary-charts></app-summary-charts>
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Lista de gastos">
+    <ng-template matTabContent>
+      <app-expense-list></app-expense-list>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

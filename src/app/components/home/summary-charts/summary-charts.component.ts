@@ -3,11 +3,11 @@ import { SummaryService } from 'src/app/core/services/summary.service';
 import Chart from 'chart.js';
 
 @Component({
-  selector: 'app-summary-body',
-  templateUrl: './summary-body.component.html',
-  styleUrls: ['./summary-body.component.scss']
+  selector: 'app-summary-charts',
+  templateUrl: './summary-charts.component.html',
+  styleUrls: ['./summary-charts.component.scss']
 })
-export class SummaryBodyComponent implements OnInit {
+export class SummaryChartsComponent implements OnInit {
   chart: any;
 
   constructor(
@@ -41,10 +41,10 @@ export class SummaryBodyComponent implements OnInit {
   getRandomColor() {
     const letters = '0123456789ABCDEF'.split('');
     let color = '#';
-    for (let i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
-}
+  }
 
 }
