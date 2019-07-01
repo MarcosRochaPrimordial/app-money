@@ -8,13 +8,5 @@ import { Wallet } from '../interfaces/wallet';
 })
 export class WalletRepositoryService {
 
-  constructor(
-    private afs: AngularFirestore
-  ) { }
-
-  getTotalCash(): Observable<Wallet[]> {
-    return this.afs.collection<Wallet>('wallet',
-      ref => ref.where('description', '==', 'Dinheiro')
-    ).valueChanges();
-  }
+  constructor() { }
 }

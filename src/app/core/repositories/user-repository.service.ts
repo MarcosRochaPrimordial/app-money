@@ -19,4 +19,8 @@ export class UserRepositoryService {
         .where('password', '==', user.password)
     ).valueChanges();
   }
+
+  getAccountCredit(): Observable<User[]> {
+    return this.afs.collection<User>('user').valueChanges();
+  }
 }

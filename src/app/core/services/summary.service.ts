@@ -3,9 +3,9 @@ import { ExpenseRepositoryService } from '../repositories/expense-repository.ser
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { WalletRepositoryService } from '../repositories/wallet-repository.service';
 import { Expense } from '../interfaces/expense';
-import { Wallet } from '../interfaces/wallet';
+import { UserRepositoryService } from '../repositories/user-repository.service';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,54 +14,78 @@ export class SummaryService {
 
   constructor(
     private expenseRepository: ExpenseRepositoryService,
-    private walletRepository: WalletRepositoryService
+    private userRepository: UserRepositoryService
   ) { }
 
-  getAllDebits(): Observable<Expense[]> {
-    return this.expenseRepository.getAllDebits();
-  }
-
-  getDebitsOfTheMonth(): Observable<Expense[]> {
+  // Get debts of the last month to further
+  getLastDebts(): Observable<Expense[]> {
     const date = moment();
-    return this.getAllDebits().pipe(
+    return this.expenseRepository.getAllDebits().pipe(
       map((expenses: Expense[]) => {
-        return expenses.filter(expense => expense.date.toDate().getFullYear() === date.year()
-          && expense.date.toDate().getMonth() === date.month());
+        if (expenses.length > 0) {
+          return expenses.filter(expense =>
+            expense.date.getMonth() >= date.subtract('1', 'month').toDate().getMonth());
+        }
       })
     );
   }
 
-  getCategoriesOfDebits(): Observable<any> {
-    return this.getDebitsOfTheMonth().pipe(
+  // Get debts of the month
+  getDebtsOfTheMonth(): Observable<Expense[]> {
+    const date = new Date();
+    return this.getLastDebts().pipe(
       map((expenses: Expense[]) => {
-        return expenses.reduce((acc, curr) => ({
-          ...acc,
-          [curr.category.description]: [...(acc[curr.category.description] || []), curr]
-        }), {});
+        if (expenses.length > 0) {
+          return expenses.filter(expense => {
+            if (expense.date.getMonth() === date.getMonth()
+              || (expense.date.getMonth() < date.getMonth()
+                && moment(expense.date).isAfter(moment().date(expense.wallet.flipDate)))) {
+              return expense;
+            }
+          });
+        }
       })
     );
   }
 
-  getDebitsFromExpenses(): Observable<number> {
-    return this.getDebitsOfTheMonth().pipe(
+  // Get total value from debts
+  getTotalValueFromDebts(): Observable<number> {
+    return this.getDebtsOfTheMonth().pipe(
       map((expenses: Expense[]) => {
-        return expenses.reduce((acc, curr) => {
-          acc.value += curr.value;
-          return acc;
-        }).value;
+        if (expenses.length > 0) {
+          return expenses.reduce((acc, curr) => {
+            acc.value += curr.value;
+            return acc;
+          }).value;
+        }
       })
     );
   }
 
+  // Get categories from Debts of the month
+  getCategoriesOfDebts(): Observable<any> {
+    return this.getDebtsOfTheMonth().pipe(
+      map((expenses: Expense[]) => {
+        if (expenses.length > 0) {
+          return expenses.reduce((acc, curr) => ({
+            ...acc,
+            [curr.category.description]: [...(acc[curr.category.description] || []), curr]
+          }), {});
+        }
+      })
+    );
+  }
+
+  // Get total account credit
   getTotalCash(): Observable<number> {
-    return this.walletRepository.getTotalCash().pipe(
-      map((wallets: Wallet[]) => {
-        return wallets.reduce((acc, curr) => {
-          return acc;
-        }).limit;
+    return this.userRepository.getAccountCredit().pipe(
+      map((users: User[]) => {
+        if (users.length > 0) {
+          return users.reduce((acc, curr) => {
+            return acc;
+          }).account;
+        }
       })
     );
   }
-
-
 }

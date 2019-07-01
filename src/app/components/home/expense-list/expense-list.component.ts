@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SummaryService } from 'src/app/core/services/summary.service';
+import { Expense } from 'src/app/core/interfaces/expense';
 
 @Component({
   selector: 'app-expense-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpenseListComponent implements OnInit {
 
-  constructor() { }
+  expenses: Expense[] = [];
+
+  constructor(
+    private summaryService: SummaryService
+  ) { }
 
   ngOnInit() {
+    this.summaryService.getDebtsOfTheMonth().subscribe((expenses: Expense[]) => {
+      this.expenses = expenses;
+    });
   }
 
 }

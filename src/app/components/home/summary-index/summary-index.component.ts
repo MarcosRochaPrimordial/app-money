@@ -18,12 +18,14 @@ export class SummaryIndexComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.summaryService.getDebitsFromExpenses().subscribe((debit: number) => {
-      this.debit = debit;
+    this.summaryService.getTotalValueFromDebts().subscribe((debit: number) => {
+      if (debit) {
+        this.debit = debit;
 
-      this.summaryService.getTotalCash().subscribe((credit: number) => {
-        this.credit = credit - this.debit;
-      });
+        this.summaryService.getTotalCash().subscribe((credit: number) => {
+          this.credit = credit - this.debit;
+        });
+      }
     });
 
   }

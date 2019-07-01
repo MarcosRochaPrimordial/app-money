@@ -1,3 +1,5 @@
-<p>
-  expense-list works!
-</p>
+<mat-list>
+  <mat-list-item role="listitem" *ngFor="let expense of expenses">
+    {{ expense.description }} - {{ expense.date | date:'dd/MM/yyyy'}} - {{ expense.value | currency }}
+  </mat-list-item>
+</mat-list>

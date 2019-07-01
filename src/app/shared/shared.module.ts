@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatFormFieldModule, MatCardModule, MatButtonModule, MatSnackBarModule, MatTabsModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatCardModule,
+  MatButtonModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatListModule
+} from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeadComponent } from './components/head/head.component';
+import { NgBrazil } from 'ng-brazil';
 
 @NgModule({
   declarations: [
@@ -17,7 +26,9 @@ import { HeadComponent } from './components/head/head.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    NgBrazil
   ],
   exports: [
     CommonModule,
@@ -28,7 +39,9 @@ import { HeadComponent } from './components/head/head.component';
     MatButtonModule,
     MatSnackBarModule,
     HeadComponent,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    NgBrazil
   ]
 })
 export class SharedModule { }
