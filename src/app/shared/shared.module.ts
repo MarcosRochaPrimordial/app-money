@@ -7,16 +7,19 @@ import {
   MatButtonModule,
   MatSnackBarModule,
   MatTabsModule,
-  MatListModule
+  MatListModule,
+  MatExpansionModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeadComponent } from './components/head/head.component';
 import { NgBrazil } from 'ng-brazil';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
-    HeadComponent
+    HeadComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { NgBrazil } from 'ng-brazil';
     MatSnackBarModule,
     MatTabsModule,
     MatListModule,
-    NgBrazil
+    NgBrazil,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
@@ -41,7 +45,9 @@ import { NgBrazil } from 'ng-brazil';
     HeadComponent,
     MatTabsModule,
     MatListModule,
-    NgBrazil
+    NgBrazil,
+    MatExpansionModule,
+    SidenavComponent
   ]
 })
 export class SharedModule { }

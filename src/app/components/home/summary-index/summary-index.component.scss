@@ -1,17 +1,22 @@
 @import "./../../../../styles-variables.scss";
 $font: 30px;
 $align: center;
-$numbers-font: 'Kanit', sans-serif;;
+$numbers-font: "Kanit", sans-serif;
 .index {
-  margin-top: 60px;
   font-size: $font;
   text-align: $align;
   font-family: $numbers-font;
   font-weight: bolder;
-  .debit {
-    color: $accent;
-  }
-  .credit {
-    color: $warn;
-  }
+}
+.index-label {
+  margin-top: 30px;
+}
+.index-numbers {
+  margin-top: 0px;
+}
+.debit {
+  color: $accent;
+}
+.credit {
+  color: $warn;
 }

@@ -18,6 +18,12 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: './components/home/home.module#HomeModule',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'expense',
+    pathMatch: 'full',
+    loadChildren: './components/expense/expense.module#ExpenseModule',
+    canActivate: [AuthGuardService]
   }
 ];
 

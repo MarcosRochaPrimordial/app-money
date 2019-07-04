@@ -3,11 +3,16 @@ import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { UserRepositoryService } from '../repositories/user-repository.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Subject } from 'rxjs';
+import { ToggleState } from '../interfaces/toggleState';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private loginSubject: Subject<ToggleState> = new Subject<ToggleState>();
+  loginState = this.loginSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -21,8 +26,11 @@ export class AuthService {
 
   get isAuthenticated(): boolean {
     if (this.userCookie) {
+      this.show();
       return true;
     }
+
+    this.hide();
     return false;
   }
 
@@ -45,5 +53,13 @@ export class AuthService {
 
   private deleteUserCookie() {
     this.cookieService.delete('user');
+  }
+
+  show() {
+    this.loginSubject.next({show: true} as ToggleState);
+  }
+
+  hide() {
+    this.loginSubject.next({show: false} as ToggleState);
   }
 }
