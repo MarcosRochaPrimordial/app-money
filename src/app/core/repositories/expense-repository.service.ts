@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { Expense, ExpenseBase } from '../interfaces/expense';
 import { map } from 'rxjs/operators';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class ExpenseRepositoryService {
     private afs: AngularFirestore
   ) { }
 
-  getAllDebits(): Observable<Expense[]> {
+  getAllDebits(user: User): Observable<Expense[]> {
     return this.afs.collection<ExpenseBase>('expense',
       ref => ref.where('isGain', '==', false)
-        .orderBy('category')
+        .where('user.email', '==', user.email)
     ).valueChanges().pipe(
       map((expenses: ExpenseBase[]) => {
         return this.toDate(expenses);

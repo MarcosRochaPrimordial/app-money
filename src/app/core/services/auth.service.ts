@@ -35,9 +35,9 @@ export class AuthService {
   }
 
   login(user: User, onEmailOrPasswordWrong: () => void): void {
-    const submit = this.userRepository.submitLogin(user).subscribe((loggedUsers: User[]) => {
+    const submit = this.userRepository.getUser(user).subscribe((loggedUsers: User[]) => {
       if (loggedUsers.length > 0) {
-        this.cookieService.set('user', loggedUsers.filter(u => u.email === user.email).join());
+        this.cookieService.set('user', JSON.stringify(loggedUsers.filter(u => u.email === user.email)[0]));
         this.router.navigate(['home']);
       } else {
         onEmailOrPasswordWrong();
@@ -49,6 +49,7 @@ export class AuthService {
   logoff() {
     this.router.navigate(['login']);
     this.deleteUserCookie();
+    this.hide();
   }
 
   private deleteUserCookie() {

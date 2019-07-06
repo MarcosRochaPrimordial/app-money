@@ -2,7 +2,7 @@
   <mat-expansion-panel *ngFor="let expense of expenses">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ expense.value | currency }}
+        {{ expense.value | real }}
       </mat-panel-title>
       <mat-panel-description>
         {{ expense.description }}

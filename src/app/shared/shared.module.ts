@@ -13,13 +13,14 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeadComponent } from './components/head/head.component';
-import { NgBrazil } from 'ng-brazil';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { RealPipe } from './pipes/real.pipe';
 
 @NgModule({
   declarations: [
     HeadComponent,
-    SidenavComponent
+    SidenavComponent,
+    RealPipe
   ],
   imports: [
     CommonModule,
@@ -31,7 +32,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MatSnackBarModule,
     MatTabsModule,
     MatListModule,
-    NgBrazil,
     MatExpansionModule
   ],
   exports: [
@@ -45,9 +45,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     HeadComponent,
     MatTabsModule,
     MatListModule,
-    NgBrazil,
     MatExpansionModule,
-    SidenavComponent
+    SidenavComponent,
+    RealPipe
   ]
 })
 export class SharedModule { }

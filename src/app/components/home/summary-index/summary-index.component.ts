@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SummaryService } from 'src/app/core/services/summary.service';
 import { Expense } from 'src/app/core/interfaces/expense';
-import { Wallet } from 'src/app/core/interfaces/wallet';
+import { User } from 'src/app/core/interfaces/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-summary-index',
@@ -10,24 +11,24 @@ import { Wallet } from 'src/app/core/interfaces/wallet';
 })
 export class SummaryIndexComponent implements OnInit {
 
+  @Input() set expenses(expenses: Expense[]) {
+    this.debit = this.summaryService.getTotalValueFromDebts(expenses);
+  }
+  user: User;
   debit = 0;
   credit = 0;
 
   constructor(
-    private summaryService: SummaryService
+    private summaryService: SummaryService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
-    this.summaryService.getTotalValueFromDebts().subscribe((debit: number) => {
-      if (debit) {
-        this.debit = debit;
+    this.user = JSON.parse(this.cookieService.get('user'));
 
-        this.summaryService.getTotalCash().subscribe((credit: number) => {
-          this.credit = credit - this.debit;
-        });
-      }
+    this.summaryService.getTotalCash(this.user).subscribe((credit: number) => {
+      this.credit = credit;
     });
-
   }
 
 }

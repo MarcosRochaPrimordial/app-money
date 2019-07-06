@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SummaryService } from 'src/app/core/services/summary.service';
 import Chart from 'chart.js';
+import { Expense } from 'src/app/core/interfaces/expense';
 
 @Component({
   selector: 'app-summary-charts',
@@ -8,6 +9,20 @@ import Chart from 'chart.js';
   styleUrls: ['./summary-charts.component.scss']
 })
 export class SummaryChartsComponent implements OnInit {
+
+  @Input() set expenses(expenses: Expense[]) {
+    const value = this.sumaryService.getCategoriesOfDebts(expenses);
+    if (value) {
+      this.chart.data.labels = Object.keys(value);
+      const qtd = [];
+      Object.keys(value).forEach((key: string) => {
+        qtd.push(value[key].length);
+        this.chart.data.datasets[0].backgroundColor.push(this.getRandomColor());
+      });
+      this.chart.data.datasets[0].data = qtd;
+      this.chart.update();
+    }
+  }
   chart: any;
 
   constructor(
@@ -23,19 +38,6 @@ export class SummaryChartsComponent implements OnInit {
           backgroundColor: []
         }],
         labels: []
-      }
-    });
-
-    this.sumaryService.getCategoriesOfDebts().subscribe((value: any) => {
-      if (value) {
-        this.chart.data.labels = Object.keys(value);
-        const qtd = [];
-        Object.keys(value).forEach((key: string) => {
-          qtd.push(value[key].length);
-          this.chart.data.datasets[0].backgroundColor.push(this.getRandomColor());
-        });
-        this.chart.data.datasets[0].data = qtd;
-        this.chart.update();
       }
     });
   }

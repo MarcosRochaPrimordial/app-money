@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row index index-label">
         <div class="debit col-9">
-            <p>Débito</p>
+            <p>Devido</p>
         </div>
         <div class="credit col-9">
             <p>Em conta</p>
@@ -9,10 +9,10 @@
     </div>
     <div class="row index index-numbers">
         <div class="debit col-9">
-            <p>{{ debit | currency }}</p>
+            <p>{{ debit | real }}</p>
         </div>
         <div class="credit col-9">
-            <p>{{ credit | currency }}</p>
+            <p>{{ credit | real }}</p>
         </div>
     </div>
 </div>

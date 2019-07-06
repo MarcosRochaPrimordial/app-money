@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SummaryService } from 'src/app/core/services/summary.service';
 import { Expense } from 'src/app/core/interfaces/expense';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-expense-list',
@@ -9,16 +10,10 @@ import { Expense } from 'src/app/core/interfaces/expense';
 })
 export class ExpenseListComponent implements OnInit {
 
-  expenses: Expense[] = [];
+  @Input() expenses: Expense[];
 
-  constructor(
-    private summaryService: SummaryService
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.summaryService.getDebtsOfTheMonth().subscribe((expenses: Expense[]) => {
-      this.expenses = expenses;
-    });
-  }
+  ngOnInit() {}
 
 }

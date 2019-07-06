@@ -13,14 +13,10 @@ export class UserRepositoryService {
     private afs: AngularFirestore
   ) { }
 
-  submitLogin(user: User): Observable<User[]> {
+  getUser(user: User): Observable<User[]> {
     return this.afs.collection<User>('user',
       ref => ref.where('email', '==', user.email)
         .where('password', '==', user.password)
     ).valueChanges();
-  }
-
-  getAccountCredit(): Observable<User[]> {
-    return this.afs.collection<User>('user').valueChanges();
   }
 }

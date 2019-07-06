@@ -1,5 +1,6 @@
 import { Category } from './category';
 import { Wallet } from './wallet';
+import { User } from './user';
 
 export interface Expense {
     category: Category;
@@ -8,6 +9,7 @@ export interface Expense {
     isGain: boolean;
     value: number;
     wallet: Wallet;
+    user: User;
 }
 
 export interface ExpenseBase {
@@ -17,4 +19,5 @@ export interface ExpenseBase {
     isGain: boolean;
     value: number;
     wallet: Wallet;
+    user: User;
 }
