@@ -10,7 +10,9 @@
     </mat-expansion-panel-header>
 
     <div class="row">
-      <p class="col-7">{{ expense.date | date:'dd/MM/yyyy hh:mm'}}</p>
+      <p class="col-18">{{ expense.date | date: 'EEEE, hh:mm dd/MM/yyyy'}}</p>
+    </div>
+    <div class="row">
       <p class="col-6">{{ expense.category.description }}</p>
       <p class="col-5">{{ expense.wallet.description }}</p>
     </div>
