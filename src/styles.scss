@@ -19,3 +19,12 @@ $theme: mat-light-theme($primary, $accent, $warn);
 .ponteiro {
     cursor: pointer;
 }
+
+.btn {
+    height: 60px;
+    font-size: 14pt;
+    font-weight: bolder;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+}

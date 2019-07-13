@@ -1,0 +1,19 @@
+@import "./../../../../styles-variables.scss";
+
+.centralize {
+    justify-content: center;
+}
+
+.toggle-expense-shower {
+    font-size: 16pt;
+    margin-bottom: 20px;
+}
+
+.centralize-text {
+    text-align: center;
+}
+
+.btn-save {
+    background-color: $primary;
+    color: #ffffff;
+}

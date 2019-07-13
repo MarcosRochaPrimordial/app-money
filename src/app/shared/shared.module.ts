@@ -8,7 +8,10 @@ import {
   MatSnackBarModule,
   MatTabsModule,
   MatListModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSlideToggleModule,
+  MatDatepickerModule,
+  MatSelectModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +35,10 @@ import { RealPipe } from './pipes/real.pipe';
     MatSnackBarModule,
     MatTabsModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -47,7 +53,10 @@ import { RealPipe } from './pipes/real.pipe';
     MatListModule,
     MatExpansionModule,
     SidenavComponent,
-    RealPipe
+    RealPipe,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

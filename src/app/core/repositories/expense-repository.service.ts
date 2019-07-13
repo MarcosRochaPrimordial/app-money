@@ -31,4 +31,8 @@ export class ExpenseRepositoryService {
       date: expense.date.toDate()
     }));
   }
+
+  save(expense: Expense) {
+    this.afs.collection('expense').add(expense);
+  }
 }
