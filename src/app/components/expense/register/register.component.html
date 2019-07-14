@@ -1,7 +1,7 @@
 <div class="container">
   <form [formGroup]="register" (ngSubmit)="saveExpense()">
     <div class="row centralize toggle-expense-shower">
-      <mat-slide-toggle formControlName="isGain" color="primary">{{ expenseShower() }}</mat-slide-toggle>
+      <mat-slide-toggle formControlName="isGain" color="primary" (change)="changeExpenseType()">{{ expenseTypeShower() }}</mat-slide-toggle>
     </div>
     <div class="centralize row">
       <mat-form-field appearance="outline" class="col-9">
@@ -12,10 +12,16 @@
       </mat-form-field>
     </div>
     <div class="row centralize">
-      <mat-form-field appearance="outline" class="col-18">
-        <mat-label>Valor</mat-label>
+      <mat-form-field appearance="outline" class="col-9">
+        <mat-label>Valor Mensal</mat-label>
         <input class="centralize-text" matInput formControlName="value" (blur)="formatCurrency()"
           (click)="unformatCurrency()">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-9">
+        <mat-label>Parcelas</mat-label>
+        <mat-select formControlName="drops">
+          <mat-option *ngFor="let drop of drops" [value]="drop.quote"> {{ drop.showName }} </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div class="row">
@@ -25,7 +31,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field appearance="outline" class="col-18">
+      <mat-form-field appearance="outline" class="col-18" *ngIf="!isGainForm.value">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="category">
           <mat-option value="null"></mat-option>
@@ -34,7 +40,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field appearance="outline" class="col-18">
+      <mat-form-field appearance="outline" class="col-18" *ngIf="!isGainForm.value">
         <mat-label>Wallets</mat-label>
         <mat-select formControlName="wallet">
           <mat-option value="null">Dinheiro</mat-option>
@@ -44,7 +50,7 @@
     </div>
     <div class="row">
       <div class="col-18">
-        <button class="btn btn-save" type="submit" [disabled]="register.invalid">Salvar</button>
+        <button class="btn btn-save" type="submit" [disabled]="verifyForm()">Salvar</button>
       </div>
     </div>
   </form>

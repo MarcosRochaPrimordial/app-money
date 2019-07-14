@@ -9,6 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/core/interfaces/user';
 import * as moment from 'moment';
 import { Expense } from 'src/app/core/interfaces/expense';
+import { MatSnackBar } from '@angular/material';
+import { Drop } from 'src/app/core/interfaces/drop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +24,56 @@ export class RegisterComponent implements OnInit, OnDestroy {
   register: FormGroup;
   categories: Category[] = [];
   wallets: Wallet[] = [];
+  drops: Drop[] = [
+    {
+      showName: 'x1',
+      quote: 1
+    },
+    {
+      showName: 'x2',
+      quote: 2
+    },
+    {
+      showName: 'x3',
+      quote: 3
+    },
+    {
+      showName: 'x4',
+      quote: 4
+    },
+    {
+      showName: 'x5',
+      quote: 5
+    },
+    {
+      showName: 'x6',
+      quote: 6
+    },
+    {
+      showName: 'x7',
+      quote: 7
+    },
+    {
+      showName: 'x8',
+      quote: 8
+    },
+    {
+      showName: 'x9',
+      quote: 9
+    },
+    {
+      showName: 'x10',
+      quote: 10
+    },
+    {
+      showName: 'x11',
+      quote: 11
+    },
+    {
+      showName: 'x12',
+      quote: 12
+    }
+  ];
 
   categoriesSubscribe: Subscription;
   walletSubscribe: Subscription;
@@ -28,7 +81,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,6 +94,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       date: [null, [Validators.required]],
       description: [null, [Validators.required]],
       value: [null, [Validators.required]],
+      drops: [this.drops[0].quote, [Validators.required]],
       category: [null, [Validators.required]],
       wallet: [null, [Validators.required]],
       user: [this.user]
@@ -71,7 +127,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
     return this.register.controls.value;
   }
 
-  expenseShower() {
+  get dropsForm() {
+    return this.register.controls.drops;
+  }
+
+  get walletForm() {
+    return this.register.controls.wallet;
+  }
+
+  get categoryForm() {
+    return this.register.controls.category;
+  }
+
+  expenseTypeShower() {
     if (this.isGainForm.value) {
       return 'Ganho';
     } else {
@@ -96,7 +164,39 @@ export class RegisterComponent implements OnInit, OnDestroy {
     expense.value = CurrencyFormatService.unformat(this.valueForm.value);
     expense.date = moment(this.dateForm.value).toDate();
 
-    this.expenseService.save(expense);
+    const result = this.expenseService.save(expense, this.user);
+    if (result) {
+      this.snackbar.open('Aconteceu um erro inesperado.', 'Ok', {
+        duration: 0
+      });
+    } else {
+      this.router.navigate(['home']);
+      this.snackbar.open('Expense registrado com sucesso!', 'Ok', {
+        duration: 5000
+      });
+    }
+  }
+
+  changeExpenseType() {
+    if (this.isGainForm.value) {
+      this.walletForm.setValidators([]);
+      this.categoryForm.setValidators([]);
+    } else {
+      this.walletForm.setValidators([Validators.required]);
+      this.categoryForm.setValidators([Validators.required]);
+    }
+    this.register.updateValueAndValidity();
+  }
+
+  verifyForm(): boolean {
+    if (!this.isGainForm.value) {
+      return this.register.invalid;
+    } else {
+      return !(this.dateForm.value
+        && this.valueForm.value
+        && this.dropsForm.value
+        && this.descriptionForm.value);
+    }
   }
 
   ngOnDestroy() {

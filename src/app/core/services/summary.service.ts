@@ -18,12 +18,11 @@ export class SummaryService {
   ) { }
 
   // Get debts of the month
-  getDebtsOfTheMonth(user: User): Observable<Expense[]> {
-    return this.expenseRepository.getAllDebits(user).pipe(
+  getExpensesOfTheMonth(user: User): Observable<Expense[]> {
+    return this.expenseRepository.getAllExpenses(user).pipe(
       map((expenses: Expense[]) => {
         if (expenses.length > 0) {
-          return expenses.filter(expense => expense.wallet != null && (expense.wallet.isCredit === true))
-            .filter(expense => {
+          return expenses.filter(expense => {
               if (expense.date.getMonth() >= moment().subtract('1', 'month').toDate().getMonth()) {
                 return expense;
               }

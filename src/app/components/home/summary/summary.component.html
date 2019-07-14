@@ -1,10 +1,10 @@
 <div class="index">
-  <app-summary-index [expenses]="expenses"></app-summary-index>
+  <app-summary-index [expenses]="debts"></app-summary-index>
 </div>
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Resumo">
     <ng-template matTabContent>
-      <app-summary-charts [expenses]="expenses"></app-summary-charts>
+      <app-summary-charts [expenses]="debts"></app-summary-charts>
     </ng-template>
   </mat-tab>
   <mat-tab label="Lista de gastos">

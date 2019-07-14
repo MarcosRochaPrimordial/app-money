@@ -14,6 +14,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   user: User;
   expenses: Expense[] = [];
+  debts: Expense[] = [];
 
   debtsSubscribe: Subscription;
 
@@ -24,8 +25,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user = JSON.parse(this.cookieService.get('user'));
-    this.debtsSubscribe = this.summaryService.getDebtsOfTheMonth(this.user).subscribe((expenses: Expense[]) => {
+    this.debtsSubscribe = this.summaryService.getExpensesOfTheMonth(this.user).subscribe((expenses: Expense[]) => {
       this.expenses = expenses;
+      this.debts = expenses.filter(expense => expense.wallet && expense.wallet.isCredit && !expense.isGain);
     });
   }
 

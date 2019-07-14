@@ -28,3 +28,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
     width: 100%;
     border-radius: 10px;
 }
+
+.centralize {
+    justify-content: center;
+}

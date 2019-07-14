@@ -2,17 +2,19 @@
   <mat-expansion-panel *ngFor="let expense of expenses">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ expense.value | real }}
+        <p [ngClass]="{'debit-cash': !expense.isGain, 'credit-cash': expense.isGain}"> <span
+            *ngIf="expense.isGain">+</span><span *ngIf="!expense.isGain">-</span>
+          {{ expense.value | real }} </p>
       </mat-panel-title>
       <mat-panel-description>
         {{ expense.description }}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <div class="row">
+    <div class="row centralize">
       <p class="col-18">{{ expense.date | date: 'EEEE, hh:mm dd/MM/yyyy'}}</p>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="expense.category && expense.wallet">
       <p class="col-6">{{ expense.category.description }}</p>
       <p class="col-5">{{ expense.wallet.description }}</p>
     </div>

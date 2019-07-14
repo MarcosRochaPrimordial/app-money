@@ -1,9 +1,5 @@
 @import "./../../../../styles-variables.scss";
 
-.centralize {
-    justify-content: center;
-}
-
 .toggle-expense-shower {
     font-size: 16pt;
     margin-bottom: 20px;
@@ -15,5 +11,10 @@
 
 .btn-save {
     background-color: $primary;
-    color: #ffffff;
+    color: $accent;
+}
+
+.btn-save:disabled {
+    background-color: $primary-disabled;
+    color: $accent-disabled;
 }

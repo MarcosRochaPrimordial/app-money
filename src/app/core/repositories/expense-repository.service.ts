@@ -10,14 +10,16 @@ import { User } from '../interfaces/user';
 })
 export class ExpenseRepositoryService {
 
+  private collectionName: string = 'expense';
+
   constructor(
     private afs: AngularFirestore
   ) { }
 
-  getAllDebits(user: User): Observable<Expense[]> {
-    return this.afs.collection<ExpenseBase>('expense',
-      ref => ref.where('isGain', '==', false)
-        .where('user.email', '==', user.email)
+  getAllExpenses(user: User): Observable<Expense[]> {
+    return this.afs.collection<ExpenseBase>(this.collectionName,
+      ref => ref.where('user.email', '==', user.email)
+        .orderBy('date', 'desc')
     ).valueChanges().pipe(
       map((expenses: ExpenseBase[]) => {
         return this.toDate(expenses);
@@ -32,7 +34,7 @@ export class ExpenseRepositoryService {
     }));
   }
 
-  save(expense: Expense) {
+  save(expense: Expense): void {
     this.afs.collection('expense').add(expense);
   }
 }
