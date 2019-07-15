@@ -31,9 +31,10 @@ export class SummaryService {
               if (expense.date.getMonth() === moment().month()
                 || (expense.date.getMonth() < moment().month()
                   && (expense.wallet
-                    && (moment(expense.date).isSameOrAfter(moment().subtract('1', 'months').date(expense.wallet.flipDate))
-                    && moment(expense.date).isBefore(moment().date(expense.wallet.overdueDate))
-                    && moment().date() < moment().date(expense.wallet.overdueDate).date())))) {
+                    && (moment(expense.date).hour(23).minute(59)
+                      .isSameOrAfter(moment().subtract('1', 'months').date(expense.wallet.flipDate))
+                      && moment(expense.date).isBefore(moment().date(expense.wallet.overdueDate).hour(23).minute(59))
+                      && moment().date() < moment().date(expense.wallet.overdueDate).date())))) {
                 return expense;
               }
             });
