@@ -10,7 +10,19 @@ import { Expense } from 'src/app/core/interfaces/expense';
 })
 export class SummaryChartsComponent implements OnInit {
 
+  chart: any;
+
   @Input() set expenses(expenses: Expense[]) {
+    this.chart = new Chart(document.getElementById('chart-category'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [],
+          backgroundColor: []
+        }],
+        labels: []
+      }
+    });
     const value = this.sumaryService.getCategoriesOfDebts(expenses);
     if (value) {
       this.chart.data.labels = Object.keys(value);
@@ -23,23 +35,12 @@ export class SummaryChartsComponent implements OnInit {
       this.chart.update();
     }
   }
-  chart: any;
 
   constructor(
     private sumaryService: SummaryService
   ) { }
 
   ngOnInit() {
-    this.chart = new Chart(document.getElementById('chart-category'), {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: [],
-          backgroundColor: []
-        }],
-        labels: []
-      }
-    });
   }
 
   getRandomColor() {

@@ -6,7 +6,7 @@
             *ngIf="expense.isGain">+</span><span *ngIf="!expense.isGain">-</span>
           {{ expense.value | real }} </p>
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description class="description-header-list">
         {{ expense.description }}
       </mat-panel-description>
     </mat-expansion-panel-header>

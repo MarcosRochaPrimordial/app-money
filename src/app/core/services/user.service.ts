@@ -12,7 +12,11 @@ export class UserService {
   ) { }
 
   get user() {
-    return JSON.parse(this.cookieService.get('user')) as User;
+    const user = this.cookieService.get('user');
+    if (user) {
+      return JSON.parse(user) as User;
+    }
+    return null;
   }
 
   set user(user: User) {
