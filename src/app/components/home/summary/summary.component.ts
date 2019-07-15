@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SummaryService } from 'src/app/core/services/summary.service';
 import { Expense } from 'src/app/core/interfaces/expense';
 import { User } from 'src/app/core/interfaces/user';
-import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-summary',
@@ -20,11 +20,11 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private summaryService: SummaryService,
-    private cookieService: CookieService
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(this.cookieService.get('user'));
+    this.user = this.userService.user;
     this.debtsSubscribe = this.summaryService.getExpensesOfTheMonth(this.user).subscribe((expenses: Expense[]) => {
       this.expenses = expenses;
       this.debts = expenses.filter(expense => expense.wallet && expense.wallet.isCredit && !expense.isGain);

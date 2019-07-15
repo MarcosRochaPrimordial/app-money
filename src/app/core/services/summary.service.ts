@@ -21,6 +21,7 @@ export class SummaryService {
   getExpensesOfTheMonth(user: User): Observable<Expense[]> {
     return this.expenseRepository.getAllExpenses(user).pipe(
       map((expenses: Expense[]) => {
+        console.log(expenses);
         if (expenses.length > 0) {
           return expenses.filter(expense => {
               if (expense.date.getMonth() >= moment().subtract('1', 'month').toDate().getMonth()) {

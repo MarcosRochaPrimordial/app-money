@@ -5,13 +5,13 @@ import { CurrencyFormatService } from 'src/app/core/services/currency-format.ser
 import { ExpenseService } from 'src/app/core/services/expense.service';
 import { Category } from 'src/app/core/interfaces/category';
 import { Wallet } from 'src/app/core/interfaces/wallet';
-import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/core/interfaces/user';
 import * as moment from 'moment';
 import { Expense } from 'src/app/core/interfaces/expense';
 import { MatSnackBar } from '@angular/material';
 import { Drop } from 'src/app/core/interfaces/drop';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -81,13 +81,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
-    private cookieService: CookieService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(this.cookieService.get('user'));
+    this.user = this.userService.user;
 
     this.register = this.fb.group({
       isGain: [false],

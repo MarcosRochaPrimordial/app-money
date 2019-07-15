@@ -6,17 +6,20 @@
             *ngIf="expense.isGain">+</span><span *ngIf="!expense.isGain">-</span>
           {{ expense.value | real }} </p>
       </mat-panel-title>
-      <mat-panel-description class="description-header-list">
-        {{ expense.description }}
+      <mat-panel-description class="description-header-list" *ngIf="expense.wallet != 'null' && expense.wallet">
+        {{ expense.wallet.description }}
+      </mat-panel-description>
+      <mat-panel-description class="description-header-list" *ngIf="!expense.wallet || expense.wallet === 'null'">
+        Dinheiro
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <div class="row centralize">
       <p class="col-18">{{ expense.date | date: 'EEEE, hh:mm dd/MM/yyyy'}}</p>
     </div>
-    <div class="row" *ngIf="expense.category && expense.wallet">
-      <p class="col-6">{{ expense.category.description }}</p>
-      <p class="col-5">{{ expense.wallet.description }}</p>
+    <div class="row">
+      <p class="col-6" *ngIf="expense.category">{{ expense.category.description }}</p>
+      <p class="col-9">{{ expense.description }}</p>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

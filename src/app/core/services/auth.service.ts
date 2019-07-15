@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
 import { UserRepositoryService } from '../repositories/user-repository.service';
-import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { ToggleState } from '../interfaces/toggleState';
 import { UserService } from './user.service';

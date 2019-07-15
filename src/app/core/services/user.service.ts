@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -7,12 +6,10 @@ import { User } from '../interfaces/user';
 })
 export class UserService {
 
-  constructor(
-    private cookieService: CookieService
-  ) { }
+  constructor() { }
 
   get user() {
-    const user = this.cookieService.get('user');
+    const user = localStorage.getItem('user');
     if (user) {
       return JSON.parse(user) as User;
     }
@@ -20,10 +17,10 @@ export class UserService {
   }
 
   set user(user: User) {
-    this.cookieService.set('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   delete() {
-    this.cookieService.delete('user');
+    localStorage.removeItem('user');
   }
 }

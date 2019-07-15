@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { CookieService } from 'ngx-cookie-service';
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -24,7 +23,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ CookieService ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
