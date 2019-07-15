@@ -21,17 +21,19 @@ export class SummaryService {
   getExpensesOfTheMonth(user: User): Observable<Expense[]> {
     return this.expenseRepository.getAllExpenses(user).pipe(
       map((expenses: Expense[]) => {
-        console.log(expenses);
         if (expenses.length > 0) {
           return expenses.filter(expense => {
-              if (expense.date.getMonth() >= moment().subtract('1', 'month').toDate().getMonth()) {
-                return expense;
-              }
-            })
+            if (expense.date.getMonth() >= moment().subtract('1', 'month').toDate().getMonth()) {
+              return expense;
+            }
+          })
             .filter(expense => {
               if (expense.date.getMonth() === moment().month()
                 || (expense.date.getMonth() < moment().month()
-                  && moment(expense.date).isAfter(moment().date(expense.wallet.flipDate)))) {
+                  && (expense.wallet
+                    && (moment(expense.date).isSameOrAfter(moment().subtract('1', 'months').date(expense.wallet.flipDate))
+                    && moment(expense.date).isBefore(moment().date(expense.wallet.overdueDate))
+                    && moment().date() < moment().date(expense.wallet.overdueDate).date())))) {
                 return expense;
               }
             });
