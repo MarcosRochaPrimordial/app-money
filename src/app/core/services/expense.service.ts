@@ -50,4 +50,20 @@ export class ExpenseService {
       return err;
     }
   }
+
+  deleteExpense(expense: Expense, user: User) {
+    try {
+      this.expenseRepository.delete(expense.id);
+      if (expense.isGain) {
+        user.account -= expense.value;
+        this.userRepository.updateUser(user);
+      } else if (!expense.isGain && (!expense.wallet || (expense.wallet && !expense.wallet.isCredit))) {
+        user.account += expense.value;
+        this.userRepository.updateUser(user);
+      }
+    } catch (err) {
+      console.error(err);
+      return err;
+    }
+  }
 }

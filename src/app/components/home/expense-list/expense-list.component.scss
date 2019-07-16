@@ -1,3 +1,5 @@
+@import '../../../../styles-variables.scss';
+
 .debit-cash {
     color: red;
 }
@@ -7,5 +9,11 @@
 }
 
 .description-header-list {
-    margin-right: -100px;
+    margin-right: 34px;
+    margin-top: 3px;
+    color: rgb(158, 158, 158);
+}
+
+.actions {
+    justify-content: flex-end;
 }

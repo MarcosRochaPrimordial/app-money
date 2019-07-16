@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: RegisterComponent
+  },
+  {
+    path: ':id',
+    pathMatch: 'full',
+    component: RegisterComponent
   }
 ];
 

@@ -18,12 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeadComponent } from './components/head/head.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RealPipe } from './pipes/real.pipe';
+import { IsNullPipe } from './pipes/is-null.pipe';
 
 @NgModule({
   declarations: [
     HeadComponent,
     SidenavComponent,
-    RealPipe
+    RealPipe,
+    IsNullPipe
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,8 @@ import { RealPipe } from './pipes/real.pipe';
     RealPipe,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    IsNullPipe
   ]
 })
 export class SharedModule { }

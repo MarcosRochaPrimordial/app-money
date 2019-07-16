@@ -3,6 +3,7 @@ import { Wallet } from './wallet';
 import { User } from './user';
 
 export interface Expense {
+    id: string;
     category: Category;
     date: Date;
     description: string;
@@ -13,6 +14,7 @@ export interface Expense {
 }
 
 export interface ExpenseBase {
+    id: string;
     category: Category;
     date: firebase.firestore.Timestamp;
     description: string;

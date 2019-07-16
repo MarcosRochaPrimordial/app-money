@@ -8,13 +8,3 @@
 .centralize-text {
     text-align: center;
 }
-
-.btn-save {
-    background-color: $primary;
-    color: $accent;
-}
-
-.btn-save:disabled {
-    background-color: $primary-disabled;
-    color: $accent-disabled;
-}

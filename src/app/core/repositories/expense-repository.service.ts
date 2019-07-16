@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { Expense, ExpenseBase } from '../interfaces/expense';
 import { map } from 'rxjs/operators';
@@ -20,21 +20,28 @@ export class ExpenseRepositoryService {
     return this.afs.collection<ExpenseBase>(this.collectionName,
       ref => ref.where('user.email', '==', user.email)
         .orderBy('date', 'desc')
-    ).valueChanges().pipe(
-      map((expenses: ExpenseBase[]) => {
+    ).snapshotChanges().pipe(
+      map((expenses: DocumentChangeAction<ExpenseBase>[]) => {
         return this.toDate(expenses);
       })
     );
   }
 
-  toDate(expenses: ExpenseBase[]): Expense[] {
-    return expenses.map(expense => ({
-      ...expense,
-      date: expense.date.toDate()
-    }));
+  toDate(expenses: DocumentChangeAction<ExpenseBase>[]): Expense[] {
+    return expenses.map(expense => {
+      return {
+        id: expense.payload.doc.id,
+        ...expense.payload.doc.data(),
+        date: expense.payload.doc.data().date.toDate()
+      };
+    });
   }
 
   save(expense: Expense): void {
-    this.afs.collection('expense').add(expense);
+    this.afs.collection(this.collectionName).add(expense);
+  }
+
+  delete(id: string): void {
+    this.afs.doc(`${this.collectionName}/${id}`).delete();
   }
 }

@@ -17,3 +17,13 @@ $title-font: "Mali", cursive;
 button, textarea, input {
     outline: none;
 }
+
+.btn-primary {
+    background-color: $primary;
+    color: $accent;
+}
+
+.btn-primary:disabled {
+    background-color: $primary-disabled;
+    color: $accent-disabled;
+}

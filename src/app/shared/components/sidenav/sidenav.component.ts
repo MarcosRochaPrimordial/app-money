@@ -40,7 +40,7 @@ export class SidenavComponent implements OnInit {
   }
 
   collapse() {
-    this.expand = false;
+    this.toggleSidenavService.setState(false);
   }
 
 }
