@@ -4,6 +4,7 @@ $accent: #ECEFF1;
 $accent-disabled: #eceff175;
 $warn: #311B92;
 $red-warn: #BF360C;
+$red-warn-disabled: rgba(191, 54, 12, 0.699);
 $grid-columns: 18;
 $grid-gutter-width: 14px;
 $title-font: "Mali", cursive;
@@ -25,5 +26,15 @@ button, textarea, input {
 
 .btn-primary:disabled {
     background-color: $primary-disabled;
+    color: $accent-disabled;
+}
+
+.btn-danger {
+    background-color: $red-warn;
+    color: $accent;
+}
+
+.btn-danger:disabled {
+    background-color: $red-warn-disabled;
     color: $accent-disabled;
 }

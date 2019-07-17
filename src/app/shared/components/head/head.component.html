@@ -1,10 +1,22 @@
 <nav>
     <div class="row">
-        <button mat-button class="button-toggle-menu" (click)="toggleSidenav()">
-            <i class="material-icons-outlined">
-                menu
-            </i>
-        </button>
-        <h1 class="title">AppMoney</h1>
+        <div class="col-6">
+            <button mat-button class="back-button" (click)="back()" *ngIf="router.routerState.snapshot.url != '/home'">
+                <i class="material-icons">
+                    arrow_back_ios
+                </i>
+                Voltar
+            </button>
+        </div>
+        <div class="col-9">
+            <h1>AppMoney</h1>
+        </div>
+        <div class="col-3">
+            <button mat-button class="back-button" (click)="toggleSidenav()">
+                <i class="material-icons">
+                    settings
+                </i>
+            </button>
+        </div>
     </div>
 </nav>

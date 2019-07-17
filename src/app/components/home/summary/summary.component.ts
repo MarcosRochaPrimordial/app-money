@@ -4,6 +4,7 @@ import { Expense } from 'src/app/core/interfaces/expense';
 import { User } from 'src/app/core/interfaces/user';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -20,7 +21,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(
     private summaryService: SummaryService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class SummaryComponent implements OnInit, OnDestroy {
       this.expenses = expenses;
       this.debts = expenses.filter(expense => expense.wallet && expense.wallet.isCredit && !expense.isGain);
     });
+  }
+
+  routeRegisterExpense() {
+    this.router.navigate(['expense']);
   }
 
   ngOnDestroy() {

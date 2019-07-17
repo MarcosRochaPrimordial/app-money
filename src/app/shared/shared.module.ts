@@ -11,7 +11,8 @@ import {
   MatExpansionModule,
   MatSlideToggleModule,
   MatDatepickerModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRippleModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -40,7 +41,8 @@ import { IsNullPipe } from './pipes/is-null.pipe';
     MatExpansionModule,
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRippleModule
   ],
   exports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { IsNullPipe } from './pipes/is-null.pipe';
     MatSlideToggleModule,
     MatDatepickerModule,
     MatSelectModule,
-    IsNullPipe
+    IsNullPipe,
+    MatRippleModule
   ]
 })
 export class SharedModule { }

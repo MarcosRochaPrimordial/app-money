@@ -1,0 +1,42 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let wallet of wallets">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ wallet.description }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+            <div [ngSwitch]="wallet.isCredit">
+                <div class="col-6" *ngSwitchCase="false">
+                    Débito
+                </div>
+                <div class="col-6" *ngSwitchCase="true">
+                    Crédito
+                </div>
+            </div>
+            <div class="col-9" *ngIf="wallet.isCredit">
+                Limite: {{ wallet.limit }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-9">
+                Fechamento da fatura: Todo dia {{ wallet.flipDate }}
+            </div>
+            <div class="col-9">
+                Vencimento da fatura: Todo dia {{ wallet.overdueDate }}
+            </div>
+        </div>
+        <div class="row acoes">
+            <button class="btn btn-danger col-6" (click)="deleteWallet(wallet.id)">Excluir</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+<div class="fab-button">
+    <button mat-fab color="primary" (click)="addWallet()">
+        <i class="material-icons-round">
+            add
+        </i>
+    </button>
+</div>

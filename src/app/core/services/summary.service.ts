@@ -67,6 +67,16 @@ export class SummaryService {
     }
   }
 
+  // Get used wallets from debts of the month
+  getWalletsOfDebts(expenses: Expense[]): any {
+    if (expenses.length > 0) {
+      return expenses.reduce((acc, curr) => ({
+        ...acc,
+        [curr.wallet.description]: [...(acc[curr.wallet.description] || []), curr]
+      }), {});
+    }
+  }
+
   // Get total account credit
   getTotalCash(user: User): Observable<number> {
     return this.userRepository.getUser(user).pipe(

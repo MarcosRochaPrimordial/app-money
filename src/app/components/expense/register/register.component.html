@@ -41,7 +41,7 @@
     </div>
     <div class="row">
       <mat-form-field appearance="outline" class="col-18" *ngIf="!isGainForm.value">
-        <mat-label>Wallets</mat-label>
+        <mat-label>Carteira</mat-label>
         <mat-select formControlName="wallet">
           <mat-option value="null">Dinheiro</mat-option>
           <mat-option *ngFor="let wallet of wallets" [value]="wallet"> {{ wallet.description }} </mat-option>

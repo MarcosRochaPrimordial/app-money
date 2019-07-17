@@ -10,10 +10,11 @@ import { Expense } from 'src/app/core/interfaces/expense';
 })
 export class SummaryChartsComponent implements OnInit {
 
-  chart: any;
+  chartCategory: any;
+  chartWallet: any;
 
   @Input() set expenses(expenses: Expense[]) {
-    this.chart = new Chart(document.getElementById('chart-category'), {
+    this.chartCategory = new Chart(document.getElementById('chart-category'), {
       type: 'doughnut',
       data: {
         datasets: [{
@@ -23,16 +24,38 @@ export class SummaryChartsComponent implements OnInit {
         labels: []
       }
     });
+    this.chartWallet = new Chart(document.getElementById('chart-wallet'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [],
+          backgroundColor: []
+        }],
+        labels: []
+      }
+    });
+
     const value = this.sumaryService.getCategoriesOfDebts(expenses);
     if (value) {
-      this.chart.data.labels = Object.keys(value);
+      this.chartCategory.data.labels = Object.keys(value);
       const qtd = [];
       Object.keys(value).forEach((key: string) => {
         qtd.push(value[key].length);
-        this.chart.data.datasets[0].backgroundColor.push(this.getRandomColor());
+        this.chartCategory.data.datasets[0].backgroundColor.push(this.getRandomColor());
       });
-      this.chart.data.datasets[0].data = qtd;
-      this.chart.update();
+      this.chartCategory.data.datasets[0].data = qtd;
+      this.chartCategory.update();
+    }
+    const valuewallets = this.sumaryService.getWalletsOfDebts(expenses);
+    if (valuewallets) {
+      this.chartWallet.data.labels = Object.keys(valuewallets);
+      const qtd = [];
+      Object.keys(valuewallets).forEach((key: string) => {
+        qtd.push(valuewallets[key].length);
+        this.chartWallet.data.datasets[0].backgroundColor.push(this.getRandomColor());
+      });
+      this.chartWallet.data.datasets[0].data = qtd;
+      this.chartWallet.update();
     }
   }
 

@@ -160,20 +160,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   saveExpense() {
-    const expense: Expense = this.register.value;
-    expense.value = CurrencyFormatService.unformat(this.valueForm.value);
-    expense.date = moment(this.dateForm.value).toDate();
-
-    const result = this.expenseService.save(expense, this.user);
-    if (result) {
-      this.snackbar.open('Aconteceu um erro inesperado.', 'Ok', {
-        duration: 0
-      });
-    } else {
-      this.router.navigate(['home']);
-      this.snackbar.open('Expense registrado com sucesso!', 'Ok', {
-        duration: 5000
-      });
+    for (let i = 1; i <= this.dropsForm.value; i++) {
+      const expense: Expense = this.register.value;
+      expense.value = CurrencyFormatService.unformat(this.valueForm.value);
+      expense.date = moment(this.dateForm.value).add(i - 1, 'month').toDate();
+      expense.drop = i;
+      const result = this.expenseService.save(expense, this.user);
+      if (result) {
+        this.snackbar.open('Aconteceu um erro inesperado.', 'Ok', {
+          duration: 0
+        });
+      } else {
+        this.router.navigate(['home']);
+        this.snackbar.open('Expense registrado com sucesso!', 'Ok', {
+          duration: 5000
+        });
+      }
     }
   }
 

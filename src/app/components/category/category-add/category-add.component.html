@@ -1,0 +1,18 @@
+<div class="container">
+    <form [formGroup]="categoryFormGroup">
+        <div class="row">
+            <mat-form-field appearance="outline" class="col-18">
+                <mat-label>Descrição</mat-label>
+                <textarea matInput cols="30" rows="2" formControlName="description"></textarea>
+            </mat-form-field>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-primary" (click)="saveCategory()">Salvar</button>
+        </div>
+        <br>
+        <div class="row">
+            <button class="btn btn-danger" (click)="dialogRef.close()">Cancelar</button>
+        </div>
+    </form>
+</div>

@@ -24,6 +24,18 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: './components/expense/expense.module#ExpenseModule',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'wallet',
+    pathMatch: 'full',
+    loadChildren: './components/wallet/wallet.module#WalletModule',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'category',
+    pathMatch: 'full',
+    loadChildren: './components/category/category.module#CategoryModule',
+    canActivate: [AuthGuardService]
   }
 ];
 

@@ -6,6 +6,8 @@ export interface Expense {
     id: string;
     category: Category;
     date: Date;
+    drop: number;
+    drops?: number;
     description: string;
     isGain: boolean;
     value: number;
@@ -17,6 +19,8 @@ export interface ExpenseBase {
     id: string;
     category: Category;
     date: firebase.firestore.Timestamp;
+    drop: number;
+    drops?: number;
     description: string;
     isGain: boolean;
     value: number;

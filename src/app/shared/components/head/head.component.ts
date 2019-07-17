@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToggleSidenavService } from 'src/app/core/services/toggle-sidenav.service';
 import { ToggleState } from 'src/app/core/interfaces/toggleState';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-head',
@@ -12,7 +13,8 @@ export class HeadComponent implements OnInit {
   sidenavState: boolean = false;
 
   constructor(
-    private toggleSidenavService: ToggleSidenavService
+    private toggleSidenavService: ToggleSidenavService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,10 @@ export class HeadComponent implements OnInit {
   toggleSidenav() {
     this.sidenavState = !this.sidenavState;
     this.toggleSidenavService.setState(this.sidenavState);
+  }
+
+  back() {
+    window.history.back();
   }
 
 }

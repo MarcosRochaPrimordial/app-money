@@ -25,18 +25,16 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  routeHome() {
-    this.router.navigate(['home']);
-    this.toggleSidenavService.setState(false);
-  }
-
-  routeRegisterExpense() {
-    this.router.navigate(['expense']);
-    this.toggleSidenavService.setState(false);
-  }
-
   exitAndClean() {
     this.authService.logoff();
+  }
+
+  wallets() {
+    this.router.navigate(['wallet']);
+  }
+
+  categories() {
+    this.router.navigate(['category']);
   }
 
   collapse() {

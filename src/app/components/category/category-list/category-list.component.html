@@ -1,0 +1,19 @@
+<mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let category of categories" matRipple>
+        <div class="col-15">
+            {{ category.description }}
+        </div>
+        <button mat-button class="col-3" (click)="deleteCategory(category.id)">
+            <i class="material-icons">
+                delete
+            </i>
+        </button>
+    </mat-list-item>
+</mat-list>
+<div class="fab-button">
+    <button mat-fab color="primary" (click)="addCategory()">
+        <i class="material-icons-round">
+            add
+        </i>
+    </button>
+</div>

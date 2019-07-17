@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WalletListComponent } from './wallet-list/wallet-list.component';
+import { CategoryListComponent } from './category-list/category-list.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: WalletListComponent
+    component: CategoryListComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WalletRoutingModule { }
+export class CategoryRoutingModule { }

@@ -32,3 +32,13 @@ $theme: mat-light-theme($primary, $accent, $warn);
 .centralize {
     justify-content: center;
 }
+
+.fab-button {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1;
+    i {
+        color: #ffffff;
+    }
+}

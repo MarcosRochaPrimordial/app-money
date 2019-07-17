@@ -3,19 +3,20 @@ $font: 30px;
 $align: center;
 $numbers-font: "Kanit", sans-serif;
 .index {
-  font-size: $font;
   text-align: $align;
   font-family: $numbers-font;
   font-weight: bolder;
 }
 .index-label {
-  margin-top: 30px;
+  margin-top: 0px;
+  color: $accent;
 }
 .index-numbers {
+  font-size: $font;
   margin-top: 0px;
 }
 .debit {
-  color: $accent;
+  color: #d50000;
 }
 .credit {
   color: $warn;
