@@ -14,7 +14,7 @@ export class HeadComponent implements OnInit {
 
   constructor(
     private toggleSidenavService: ToggleSidenavService,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit() {

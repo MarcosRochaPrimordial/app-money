@@ -15,7 +15,7 @@ export class CategoryAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
-    private dialogRef: MatDialogRef<CategoryAddComponent>,
+    public dialogRef: MatDialogRef<CategoryAddComponent>,
     private categoryService: CategoryService
   ) { }
 

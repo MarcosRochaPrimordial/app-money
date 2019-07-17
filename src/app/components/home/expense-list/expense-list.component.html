@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <p class="col-6" *ngIf="expense.category">{{ expense.category.description }}</p>
-      <p class="col-12">{{ expense.description }}</p>
+      <p class="col-12">{{ expense.description }}&nbsp;{{ expense.drop }}/{{ expense.drops }}</p>
     </div>
     <div class="row actions">
       <button class="btn btn-primary col-6" (click)="deleteExpense(expense)">Deletar</button>

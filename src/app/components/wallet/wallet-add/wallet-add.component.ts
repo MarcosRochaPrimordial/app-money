@@ -22,7 +22,7 @@ export class WalletAddComponent implements OnInit {
     private userService: UserService,
     private walletService: WalletService,
     private snackbar: MatSnackBar,
-    private dialogRef: MatDialogRef<WalletAddComponent>
+    public dialogRef: MatDialogRef<WalletAddComponent>
   ) { }
 
   ngOnInit() {
