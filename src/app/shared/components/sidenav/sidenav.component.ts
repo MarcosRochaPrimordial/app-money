@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToggleSidenavService } from 'src/app/core/services/toggle-sidenav.service';
 import { ToggleState } from 'src/app/core/interfaces/toggleState';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthAppService } from 'src/app/core/services/auth-app.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
 
   constructor(
     private toggleSidenavService: ToggleSidenavService,
-    private authService: AuthService,
+    private authService: AuthAppService,
     private router: Router
   ) { }
 

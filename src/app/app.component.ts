@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './core/services/auth.service';
+import { AuthAppService } from './core/services/auth-app.service';
 import { ToggleState } from './core/interfaces/toggleState';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { AppDateAdapter, APP_DATE_FORMATS } from './shared/adapters/date.adapter';
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   show: boolean = false;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthAppService,
     private update: SwUpdate
   ) {
     this.update.available.subscribe(event => {

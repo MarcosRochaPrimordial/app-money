@@ -19,7 +19,6 @@ export class UserRepositoryService {
   getUser(user: User): Observable<User[]> {
     return this.afs.collection<User>(this.collectionName,
       ref => ref.where('email', '==', user.email)
-        .where('password', '==', user.password)
     ).snapshotChanges().pipe(
       map((documents: DocumentChangeAction<User>[]) => {
         return this.toUser(documents);
@@ -38,5 +37,9 @@ export class UserRepositoryService {
 
   updateUser(user: User): void {
     this.afs.doc(`${this.collectionName}/${user.id}`).update(user);
+  }
+
+  addUser(user: User): void {
+    this.afs.collection(this.collectionName).add(user);
   }
 }

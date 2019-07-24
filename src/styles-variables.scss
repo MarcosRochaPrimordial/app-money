@@ -29,6 +29,17 @@ button, textarea, input {
     color: $accent-disabled;
 }
 
+.btn-accent {
+    background-color: $accent;
+    color: $primary;
+}
+
+.btn-accent:disabled {
+    background-color: $accent-disabled;
+    color: $primary-disabled;
+}
+
+
 .btn-danger {
     background-color: $red-warn;
     color: $accent;

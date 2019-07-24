@@ -27,15 +27,17 @@ export class ExpenseListComponent implements OnInit {
   }
 
   deleteExpense(expense: Expense) {
-    const result = this.expenseService.deleteExpense(expense, this.user);
-    if (result) {
-      this.snackbar.open('Aconteceu um erro inesperado.', 'Ok', {
-        duration: 0
-      });
-    } else {
-      this.snackbar.open('Excluído com sucesso!', 'Ok', {
-        duration: 5000
-      });
+    if (confirm('Deseja realmente apagar este registro?')) {
+      const result = this.expenseService.deleteExpense(expense, this.user);
+      if (result) {
+        this.snackbar.open('Aconteceu um erro inesperado.', 'Ok', {
+          duration: 0
+        });
+      } else {
+        this.snackbar.open('Excluído com sucesso!', 'Ok', {
+          duration: 5000
+        });
+      }
     }
   }
 

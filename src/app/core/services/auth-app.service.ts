@@ -5,11 +5,12 @@ import { UserRepositoryService } from '../repositories/user-repository.service';
 import { Subject } from 'rxjs';
 import { ToggleState } from '../interfaces/toggleState';
 import { UserService } from './user.service';
+import { AuthService } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthAppService {
 
   private loginSubject: Subject<ToggleState> = new Subject<ToggleState>();
   loginState = this.loginSubject.asObservable();
@@ -17,7 +18,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private userRepository: UserRepositoryService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) { }
 
   get userCookie() {
@@ -34,19 +36,22 @@ export class AuthService {
     return false;
   }
 
-  login(user: User, onEmailOrPasswordWrong: () => void): void {
+  login(user: User): void {
     const submit = this.userRepository.getUser(user).subscribe((loggedUsers: User[]) => {
       if (loggedUsers.length > 0) {
         this.userService.user = loggedUsers.filter(u => u.email === user.email)[0];
         this.router.navigate(['home']);
       } else {
-        onEmailOrPasswordWrong();
+        user.account = 0;
+        this.userRepository.addUser(user);
+        this.login(user);
       }
       submit.unsubscribe();
     });
   }
 
   logoff() {
+    this.authService.signOut();
     this.router.navigate(['login']);
     this.deleteUserCookie();
     this.hide();

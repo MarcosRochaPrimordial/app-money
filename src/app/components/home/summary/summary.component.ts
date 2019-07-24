@@ -16,6 +16,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   user: User;
   expenses: Expense[] = [];
   debts: Expense[] = [];
+  allDebts: Expense[] = [];
 
   debtsSubscribe: Subscription;
 
@@ -29,6 +30,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.user = this.userService.user;
     this.debtsSubscribe = this.summaryService.getExpensesOfTheMonth(this.user).subscribe((expenses: Expense[]) => {
       this.expenses = expenses;
+      this.allDebts = expenses.filter(expense => !expense.isGain);
       this.debts = expenses.filter(expense => expense.wallet && expense.wallet.isCredit && !expense.isGain);
     });
   }

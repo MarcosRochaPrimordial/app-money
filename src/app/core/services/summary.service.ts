@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { Expense } from '../interfaces/expense';
 import { UserRepositoryService } from '../repositories/user-repository.service';
 import { User } from '../interfaces/user';
+import { Wallet } from '../interfaces/wallet';
 
 @Injectable({
   providedIn: 'root'
@@ -70,10 +71,25 @@ export class SummaryService {
   // Get used wallets from debts of the month
   getWalletsOfDebts(expenses: Expense[]): any {
     if (expenses.length > 0) {
-      return expenses.reduce((acc, curr) => ({
-        ...acc,
-        [curr.wallet.description]: [...(acc[curr.wallet.description] || []), curr]
-      }), {});
+      return expenses.map(expense => {
+        if (expense.wallet) {
+          return expense;
+        } else {
+          const wallet: Wallet = {
+            description: 'Dinheiro',
+            flipDate: null,
+            isCredit: false,
+            limit: null,
+            overdueDate: null,
+            user: null
+          };
+          expense.wallet = wallet;
+          return expense;
+        }
+      }).reduce((acc, curr) => ({
+          ...acc,
+          [curr.wallet.description]: [...(acc[curr.wallet.description] || []), curr]
+        }), {});
     }
   }
 
