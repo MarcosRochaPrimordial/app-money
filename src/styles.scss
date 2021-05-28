@@ -18,7 +18,7 @@ $my-theme: mat.define-light-theme((
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Ubuntu Mono', monospace; }
+body { margin: 0; }
 
 //app-money
 .center {
@@ -26,4 +26,8 @@ body { margin: 0; font-family: 'Ubuntu Mono', monospace; }
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.font-ubuntu {
+  font-family: 'Ubuntu Mono', monospace;
 }

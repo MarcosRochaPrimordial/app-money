@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const exports = [
   MatToolbarModule,
@@ -15,6 +17,8 @@ const exports = [
   MatIconModule,
   MatSnackBarModule,
   MatCardModule,
+  MatSidenavModule,
+  MatTooltipModule
 ];
 const declarations: any = [
   HeaderComponent,

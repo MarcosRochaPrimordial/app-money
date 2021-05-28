@@ -3,5 +3,5 @@ export interface User {
     email: string;
     name: string;
     language: string;
-    photoUrl?: string;
+    photoUrl: string;
 }
