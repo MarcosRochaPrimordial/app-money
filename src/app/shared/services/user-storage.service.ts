@@ -15,11 +15,19 @@ export class UserStorageService {
   }
 
   get user(): User {
-    return JSON.parse(localStorage.getItem(this.USER_CREDENTIAL) || '') as User;
+    return JSON.parse(localStorage.getItem(this.USER_CREDENTIAL) || '{}') as User;
   }
 
   get hasUser(): boolean {
     return !!this.user.id;
+  }
+
+  set language(language: string) {
+    if (this.hasUser) {
+      const user = this.user;
+      user.language = language;
+      this.user = user;
+    }
   }
 
   public terminateUser() {

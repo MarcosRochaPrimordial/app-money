@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { BehaviorSubject } from 'rxjs';
 import { UserStorageService } from './user-storage.service';
@@ -9,29 +10,37 @@ import { UserStorageService } from './user-storage.service';
 export class AuthService {
 
   private loginSubject = new BehaviorSubject<boolean>(false);
-  public logged = this.loginSubject.asObservable();
+  public login = this.loginSubject.asObservable();
 
   constructor(
     private socialService: SocialAuthService,
     private userStorage: UserStorageService,
+    private router: Router,
   ) { }
 
-  login() {
+  get logged() {
+    return this.userStorage.hasUser;
+  }
+
+  signin() {
     this.socialService.authState.subscribe(user => {
       this.userStorage.user = {
         id: user.id,
         email: user.email,
         name: user.firstName,
         photoUrl: user.photoUrl,
+        language: 'enUS',
       };
       this.loginSubject.next(true);
+      this.router.navigate(['']);
     });
     this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  logout() {
+  singout() {
     this.socialService.signOut();
     this.loginSubject.next(false);
     this.userStorage.terminateUser();
+    this.router.navigate(['login']);
   }
 }
