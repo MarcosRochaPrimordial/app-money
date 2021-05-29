@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RetractableService } from '../../services/retractable.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  public retract = false;
+
+  constructor(
+    private retractableService: RetractableService,
+  ) { }
 
   ngOnInit(): void {
+    this.retractableService.retractable.subscribe(retract => {
+      this.retract = retract;
+    });
   }
 
 }
