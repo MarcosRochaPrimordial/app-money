@@ -4,5 +4,14 @@
     "remaining": "Remaining",
     "savings": "Savings",
     "final_budget": "Final Budget",
-    "periods": "Periods"
+    "periods": "Periods",
+    "add_period": "Add Period",
+    "edit_period": "Edit Period",
+    "no_data": "No data",
+    "description": "Description",
+    "importance": "Importance",
+    "net_importance": "Net importance for the period",
+    "description_required": "Description field is required",
+    "importance_required": "Importance field is required",
+    "save": "Save"
 }

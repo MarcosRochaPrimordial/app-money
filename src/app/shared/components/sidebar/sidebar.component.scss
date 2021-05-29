@@ -1,5 +1,7 @@
+@import './../../../../style-variables.scss';
+
 .sidebar {
-    background-color: #F5F5F5;
+    background-color: $principal;
     width: 20%;
     height: 100vh;
     display: none;

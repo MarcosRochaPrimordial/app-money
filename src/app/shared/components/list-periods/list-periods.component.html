@@ -2,13 +2,16 @@
     <mat-card class="card-list-periods">
         <div class="list-periods-header">
             <h2 class="header-label">{{ 'periods' | translate }}</h2>
-            <button mat-mini-fab class="add-button" color="primary">
+            <button mat-mini-fab class="add-button" color="primary" (click)="openModalAddPeriod()">
                 <mat-icon>
                     add
                 </mat-icon>
             </button>
         </div>
         <mat-list>
+            <div *ngIf="!periods.length" class="no-data">
+                <span class="font-ubuntu">{{ 'no_data' | translate }}</span>
+            </div>
             <mat-list-item class="period-item" *ngFor="let period of periods; let i = index"
                 matTooltip="{{ period.startDate | date:'dd/MM/yyyy' }} - {{ period.endDate | date:'dd/MM/yyyy'}}"
                 [class.period-item-active]="active === i">

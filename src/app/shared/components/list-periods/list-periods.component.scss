@@ -1,3 +1,5 @@
+@import './../../../../style-variables.scss';
+
 .list-periods {
     width: 100%;
     height: 100%;
@@ -14,7 +16,7 @@
             margin-top: 0;
         }
         .period-item-active {
-            background-color: #F5F5F5;
+            background-color: $principal;
             border-radius: 10px;
         }
         .period-item {

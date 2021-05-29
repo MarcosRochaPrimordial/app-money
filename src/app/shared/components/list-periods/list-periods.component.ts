@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Period } from '../../models/Period.model';
+import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component';
 
 @Component({
   selector: 'app-list-periods',
@@ -8,28 +12,19 @@ import { Component, OnInit } from '@angular/core';
 export class ListPeriodsComponent implements OnInit {
 
   active = 1;
-  periods = [
-    { name: 'Hydrogen', startDate: new Date(), endDate: new Date(), budget: 185600 },
-    { name: 'Helium', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Lithium', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Beryllium', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Boron', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Carbon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Nitrogen', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Oxygen', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Fluorine', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-    { name: 'Neon', startDate: new Date(), endDate: new Date(), budget: 20000 },
-  ];
+  periods: Period[] = [];
 
-  constructor() { }
+  constructor(
+    private modal: MatDialog
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  openModalAddPeriod() {
+    this.modal.open(ModalPeriodsComponent, {
+      width: '450px',
+    });
   }
 
 }
