@@ -11,6 +11,7 @@
         overflow: auto;
         h2 {
             margin-bottom: 0;
+            margin-top: 0;
         }
         .period-item-active {
             background-color: #F5F5F5;
@@ -41,6 +42,16 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+            }
+        }
+        .list-periods-header {
+            display: flex;
+            align-items: center;
+            .header-label {
+                flex: 7;
+            }
+            .add-button {
+                flex: 1;
             }
         }
     }
