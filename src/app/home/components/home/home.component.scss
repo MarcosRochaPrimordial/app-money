@@ -1,12 +1,11 @@
-.home {
-    right: 0;
-    bottom: 0;
-    left: 0;
-    top: 10%;
-    position: absolute;
-    padding: 10px;
-}
+@import './../../../../style-variables.scss';
 
-.active {
-    left: 20%;
+.home {
+    height: 100%;
+    .charts {
+        flex: 3;
+    }
+    .spendings {
+        flex: 7;
+    }
 }

@@ -57,6 +57,13 @@ body { margin: 0; }
   color: $warn;
 }
 
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+
 //app-money margins
 .mt-10 {
   margin-top: 10px;

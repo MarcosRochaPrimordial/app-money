@@ -2,9 +2,8 @@
 
 .sidebar {
     background-color: $principal;
-    width: 20%;
     height: 100vh;
-    display: none;
+    display: flex;
     flex-direction: column;
     .sidebar-item {
         margin: 5px 10px;
@@ -12,8 +11,4 @@
     .list-periods {
         flex: 1;
     }
-}
-
-.active {
-    display: flex;
 }

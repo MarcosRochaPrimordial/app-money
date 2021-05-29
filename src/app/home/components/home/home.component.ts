@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RetractableService } from 'src/app/shared/services/retractable.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +7,9 @@ import { RetractableService } from 'src/app/shared/services/retractable.service'
 })
 export class HomeComponent implements OnInit {
 
-  retract = false;
-
-  constructor(
-    private retractableService: RetractableService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.retractableService.retractable.subscribe(retract => {
-      this.retract = retract;
-    });
   }
 
 }

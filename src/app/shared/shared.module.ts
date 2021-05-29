@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { ListPeriodsComponent } from './components/list-periods/list-periods.component';
 import { PeriodInfoComponent } from './components/period-info/period-info.component';
@@ -26,8 +27,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserComponent } from './components/user/user.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { ModalPeriodsComponent } from './components/modal-periods/modal-periods.component';
-
-
 
 const exports = [
   MatToolbarModule,
@@ -46,6 +45,7 @@ const exports = [
   ReactiveFormsModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatTabsModule,
 ];
 const declarations: any = [
   HeaderComponent,
