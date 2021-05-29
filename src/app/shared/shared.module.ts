@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const exports = [
   MatToolbarModule,
@@ -18,7 +19,8 @@ const exports = [
   MatSnackBarModule,
   MatCardModule,
   MatSidenavModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatExpansionModule,
 ];
 const declarations: any = [
   HeaderComponent,

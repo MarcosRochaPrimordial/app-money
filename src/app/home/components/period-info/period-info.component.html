@@ -1,1 +1,34 @@
-<p>period-info works!</p>
+<mat-accordion>
+    <mat-expansion-panel expanded hideToggle>
+        <mat-expansion-panel-header>
+            <div class="period-info font-ubuntu">
+                <div class="info-item">
+                    R$ 240,00
+                    <div class="info-item-label">
+                        {{ 'budget' | translate }}
+                    </div>
+                </div>
+                <div class="info-item">
+                    R$ 240,00
+                    <div class="info-item-label">
+                        {{ 'remaining' | translate }}
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <div class="period-detached font-ubuntu">
+            <div class="detached-item">
+                <span class="detached-item-label">{{ 'savings' | translate }}</span>
+            </div>
+            <div class="detached-item">
+                R$ 63,00
+            </div>
+            <div class="detached-item mt-10">
+                <span class="detached-item-label">{{ 'final_budget' | translate }}</span>
+            </div>
+            <div class="detached-item">
+                R$ 180,00
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

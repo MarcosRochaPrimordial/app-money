@@ -1,3 +1,7 @@
 {
-    "signout": "Sign out"
+    "signout": "Sign out",
+    "budget": "Budget",
+    "remaining": "Remaining",
+    "savings": "Savings",
+    "final_budget": "Final Budget"
 }

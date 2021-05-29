@@ -1,5 +1,4 @@
 .card-user {
-    margin: 10px;
     display: flex;
     .img-user {
         height: 50px;
@@ -10,8 +9,5 @@
     .name-user {
         margin-left: 15px;
         flex: 3;
-    }
-    .icon-user {
-        float: right;
     }
 }
