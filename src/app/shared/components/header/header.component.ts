@@ -8,23 +8,6 @@ import { UserStorageService } from '../../services/user-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-
-  public logged = false;
-  private subscription = new Subscription();
-
-  constructor(
-    public auth: AuthService
-  ) { }
-
-  ngOnInit(): void {
-    this.subscription.add(
-      this.auth.login.subscribe(logged => this.logged = logged)
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
+export class HeaderComponent {
+  constructor() { }
 }

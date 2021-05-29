@@ -11,6 +11,14 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { ListPeriodsComponent } from './components/list-periods/list-periods.component';
+import { PeriodInfoComponent } from './components/period-info/period-info.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { UserComponent } from './components/user/user.component';
+import { CurrencyPipe } from './pipes/currency.pipe';
 
 const exports = [
   MatToolbarModule,
@@ -21,10 +29,18 @@ const exports = [
   MatSidenavModule,
   MatTooltipModule,
   MatExpansionModule,
+  MatListModule,
+  MatDividerModule,
 ];
 const declarations: any = [
   HeaderComponent,
+  SidebarComponent,
+  ListPeriodsComponent,
+  PeriodInfoComponent,
+  SidebarComponent,
+  UserComponent,
   TranslatePipe,
+  CurrencyPipe,
 ];
 
 @NgModule({

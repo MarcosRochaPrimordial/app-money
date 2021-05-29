@@ -5,7 +5,12 @@
     left: 0;
     bottom: 0;
     top: 0;
+    display: flex;
+    flex-direction: column;
     .sidebar-item {
-        margin: 10px;
+        margin: 5px 10px;
+    }
+    .list-periods {
+        flex: 1;
     }
 }

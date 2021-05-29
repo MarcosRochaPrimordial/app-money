@@ -1,2 +1,5 @@
-<app-header></app-header>
+<div *ngIf="logged || auth.logged">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+</div>
 <router-outlet></router-outlet>

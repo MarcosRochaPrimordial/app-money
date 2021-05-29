@@ -1,0 +1,21 @@
+<div class="list-periods">
+    <mat-card class="card-list-periods">
+        <h2>{{ 'periods' | translate }}</h2>
+        <mat-list>
+            <mat-list-item class="period-item" *ngFor="let period of periods; let i = index"
+                matTooltip="{{ period.startDate | date:'dd/MM/yyyy' }} - {{ period.endDate | date:'dd/MM/yyyy'}}"
+                [class.period-item-active]="active === i">
+                <div class="period-item-content font-ubuntu">
+                    <mat-icon class="item-icon list-icon pointer">edit</mat-icon>
+                    <span class="font-period-item item-content-item item-name">
+                        {{ period.name }}
+                    </span>
+                    <span class="font-period-item item-content-item item-budget">
+                        {{ period.budget | currency }}
+                    </span>
+                    <mat-icon class="item-icon list-icon pointer">subdirectory_arrow_right</mat-icon>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+</div>
