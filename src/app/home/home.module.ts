@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { ModalSpendingsComponent } from './components/modal-spendings/modal-spendings.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsComponent } from './components/charts/charts.component';
 import { SpendingsComponent } from './components/spendings/spendings.component';
@@ -13,7 +12,6 @@ import { FixedSpendingsComponent } from './components/fixed-spendings/fixed-spen
 @NgModule({
   declarations: [
     HomeComponent,
-    ModalSpendingsComponent,
     ChartsComponent,
     SpendingsComponent,
     FixedSpendingsComponent,

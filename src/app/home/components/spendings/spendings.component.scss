@@ -1,3 +1,13 @@
 .spendings {
-    height: 100%;
+    border: 1px solid green;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(100% - 255px);
+    .table-container {
+        border: 1px solid blue;
+        position: relative;
+        height: 100%;
+    }
 }

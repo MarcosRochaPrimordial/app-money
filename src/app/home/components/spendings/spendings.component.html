@@ -1,7 +1,9 @@
 <div class="spendings">
-    <mat-tab-group color="primary" backgroundColor="accent">
+    <mat-tab-group backgroundColor="accent">
         <mat-tab label="{{ 'fixed_spendings' | translate }}">
-            <app-fixed-spendings></app-fixed-spendings>
+            <div class="table-container">
+                <app-fixed-spendings></app-fixed-spendings>
+            </div>
         </mat-tab>
         <mat-tab label="{{ 'outgoings' | translate }}"> Content 2 </mat-tab>
         <mat-tab label="{{ 'incomes' | translate }}"> Content 3 </mat-tab>
