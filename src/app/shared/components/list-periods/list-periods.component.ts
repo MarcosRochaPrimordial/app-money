@@ -11,7 +11,7 @@ import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component'
 })
 export class ListPeriodsComponent implements OnInit {
 
-  active = 1;
+  active = null;
   periods: Period[] = [];
 
   constructor(

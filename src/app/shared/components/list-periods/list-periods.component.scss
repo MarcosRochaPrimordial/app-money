@@ -11,10 +11,6 @@
         left: 0;
         right: 0;
         overflow: auto;
-        h2 {
-            margin-bottom: 0;
-            margin-top: 0;
-        }
         .period-item-active {
             background-color: $principal;
             border-radius: 10px;
@@ -48,12 +44,18 @@
         }
         .list-periods-header {
             display: flex;
-            align-items: center;
+            h2 {
+                margin-bottom: 0;
+                margin-top: 0;
+            }
+            .header-item {
+                margin: auto;
+            }
             .header-label {
-                flex: 7;
+                margin-left: 0;
             }
             .add-button {
-                flex: 1;
+                margin-right: 0;
             }
         }
     }
