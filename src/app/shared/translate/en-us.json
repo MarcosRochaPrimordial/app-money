@@ -13,5 +13,8 @@
     "net_importance": "Net importance for the period",
     "description_required": "Description field is required",
     "importance_required": "Importance field is required",
-    "save": "Save"
+    "save": "Save",
+    "fixed_spendings": "Fixed spendings",
+    "outgoings": "Outgoings",
+    "incomes": "Incomes"
 }

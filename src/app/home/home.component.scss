@@ -1,0 +1,11 @@
+@import './../../style-variables.scss';
+
+.home {
+    height: 100%;
+    .charts {
+        height: 250px;
+    }
+    .spendings {
+        height: calc(100% - 250px);
+    }
+}

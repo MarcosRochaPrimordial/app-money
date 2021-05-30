@@ -20,6 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { ListPeriodsComponent } from './components/list-periods/list-periods.component';
 import { PeriodInfoComponent } from './components/period-info/period-info.component';
@@ -46,6 +49,9 @@ const exports = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCheckboxModule,
 ];
 const declarations: any = [
   HeaderComponent,
