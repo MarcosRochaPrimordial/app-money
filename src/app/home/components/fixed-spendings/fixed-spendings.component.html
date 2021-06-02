@@ -1,1 +1,48 @@
-<div class="fixed-spendings"></div>
+<div class="flex flex-column fixed-spendings">
+    <div class="table-wrapper">
+        <mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="checkbox">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-checkbox></mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> {{ 'description' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.description }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="importance">
+                <mat-header-cell *matHeaderCellDef> {{ 'importance' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ element.importance | currency }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> {{ 'actions' | translate }} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-button>
+                        <mat-icon>content_copy</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+    <div class="flex font-ubuntu">
+        <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span> R$ 3850,00</div>
+        <div class="flex-1">
+            <mat-paginator #paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

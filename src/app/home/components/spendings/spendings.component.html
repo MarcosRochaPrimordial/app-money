@@ -1,11 +1,23 @@
-<div class="spendings">
-    <mat-tab-group backgroundColor="accent">
-        <mat-tab label="{{ 'fixed_spendings' | translate }}">
-            <div class="table-container">
-                <app-fixed-spendings></app-fixed-spendings>
-            </div>
-        </mat-tab>
-        <mat-tab label="{{ 'outgoings' | translate }}"> Content 2 </mat-tab>
-        <mat-tab label="{{ 'incomes' | translate }}"> Content 3 </mat-tab>
-    </mat-tab-group>
+<div class="spendings flex flex-column">
+    <div class="tab font-ubuntu">
+        <button #fixed_spendings_button (click)="openTab($event, 'fixed_spendings')">{{ 'fixed_spendings' | translate
+            }}</button>
+        <button #outgoings_button (click)="openTab($event, 'outgoings')">{{ 'outgoings' | translate }}</button>
+        <button #incomes_button (click)="openTab($event, 'incomes')">{{ 'incomes' | translate }}</button>
+    </div>
+    <div class="container-tabs">
+        <div #fixed_spendings class="tab-content font-ubuntu">
+            <app-fixed-spendings></app-fixed-spendings>
+        </div>
+
+        <div #outgoings class="tab-content font-ubuntu">
+            <h3>{{ 'outgoings' | translate }}</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
+
+        <div #incomes class="tab-content font-ubuntu">
+            <h3>{{ 'incomes' | translate }}</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+    </div>
 </div>

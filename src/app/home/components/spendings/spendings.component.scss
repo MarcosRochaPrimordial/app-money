@@ -1,13 +1,47 @@
+@import './../../../../style-variables.scss';
+
 .spendings {
-    border: 1px solid green;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: calc(100% - 255px);
-    .table-container {
-        border: 1px solid blue;
-        position: relative;
+    .tab {
+        button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            background-color: $principal;
+            color: #fff;
+            border-radius: 7px 7px 0 0;
+        }
+        button:hover {
+            background-color: #777777;
+        }
+        button.active {
+            background-color: $primary;
+            color: #fff;
+        }
+    }
+    .container-tabs {
         height: 100%;
+        width: 100%;
+        position: relative;
+        background-color: $primary;
+        .tab-content {
+            display: none;
+            padding: 6px 12px;
+            box-shadow: 0px 5px 5px #ccc;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+        }
     }
 }

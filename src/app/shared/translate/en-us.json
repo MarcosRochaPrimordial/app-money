@@ -16,5 +16,7 @@
     "save": "Save",
     "fixed_spendings": "Fixed spendings",
     "outgoings": "Outgoings",
-    "incomes": "Incomes"
+    "incomes": "Incomes",
+    "total_colon": "Total:",
+    "actions": "Actions"
 }

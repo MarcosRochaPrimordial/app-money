@@ -45,6 +45,10 @@ body { margin: 0; }
   font-size: 10pt;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .primary {
   color: $primary;
 }
@@ -63,6 +67,10 @@ body { margin: 0; }
 
 .flex-column {
   flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
 }
 
 //app-money margins
