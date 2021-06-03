@@ -1,1 +1,15 @@
-<div class="charts"></div>
+<div class="charts">
+    <div class="flex">
+        <div class="flex-1">
+            <apx-chart [series]="budgetChartOptions.series" [chart]="budgetChartOptions.chart"
+                [xaxis]="budgetChartOptions.xaxis" [title]="budgetChartOptions.title"></apx-chart>
+        </div>
+        <div class="flex-1">
+            <apx-chart [series]="totalSpendingChartOptions.series" [chart]="totalSpendingChartOptions.chart"
+                [yaxis]="totalSpendingChartOptions.yaxis" [xaxis]="totalSpendingChartOptions.xaxis"
+                [labels]="totalSpendingChartOptions.labels" [stroke]="totalSpendingChartOptions.stroke"
+                [title]="totalSpendingChartOptions.title" [dataLabels]="totalSpendingChartOptions.dataLabels"
+                [fill]="totalSpendingChartOptions.fill" [tooltip]="totalSpendingChartOptions.tooltip"></apx-chart>
+        </div>
+    </div>
+</div>

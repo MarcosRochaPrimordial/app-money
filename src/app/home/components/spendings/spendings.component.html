@@ -1,23 +1,22 @@
 <div class="spendings flex flex-column">
     <div class="tab font-ubuntu">
-        <button #fixed_spendings_button (click)="openTab($event, 'fixed_spendings')">{{ 'fixed_spendings' | translate
+        <button #fixed_spendings_button (click)="openTab($event, 'fixed_spendings_view')">{{ 'fixed_spendings' |
+            translate
             }}</button>
-        <button #outgoings_button (click)="openTab($event, 'outgoings')">{{ 'outgoings' | translate }}</button>
-        <button #incomes_button (click)="openTab($event, 'incomes')">{{ 'incomes' | translate }}</button>
+        <button #outgoings_button (click)="openTab($event, 'outgoings_view')">{{ 'outgoings' | translate }}</button>
+        <button #incomes_button (click)="openTab($event, 'incomes_view')">{{ 'incomes' | translate }}</button>
     </div>
     <div class="container-tabs">
-        <div #fixed_spendings class="tab-content font-ubuntu">
-            <app-fixed-spendings></app-fixed-spendings>
+        <div #fixed_spendings_view class="tab-content font-ubuntu">
+            <app-data-table [elements]="fixedSpendings"></app-data-table>
         </div>
 
-        <div #outgoings class="tab-content font-ubuntu">
-            <h3>{{ 'outgoings' | translate }}</h3>
-            <p>Paris is the capital of France.</p>
+        <div #outgoings_view class="tab-content font-ubuntu">
+            <app-data-table [elements]="outgoings"></app-data-table>
         </div>
 
-        <div #incomes class="tab-content font-ubuntu">
-            <h3>{{ 'incomes' | translate }}</h3>
-            <p>Tokyo is the capital of Japan.</p>
+        <div #incomes_view class="tab-content font-ubuntu">
+            <app-data-table [elements]="incomes"></app-data-table>
         </div>
     </div>
 </div>

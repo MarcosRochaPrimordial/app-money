@@ -23,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { ListPeriodsComponent } from './components/list-periods/list-periods.component';
 import { PeriodInfoComponent } from './components/period-info/period-info.component';
@@ -52,6 +53,7 @@ const exports = [
   MatTableModule,
   MatPaginatorModule,
   MatCheckboxModule,
+  NgApexchartsModule
 ];
 const declarations: any = [
   HeaderComponent,

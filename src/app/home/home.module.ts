@@ -6,7 +6,7 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartsComponent } from './components/charts/charts.component';
 import { SpendingsComponent } from './components/spendings/spendings.component';
-import { FixedSpendingsComponent } from './components/fixed-spendings/fixed-spendings.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { FixedSpendingsComponent } from './components/fixed-spendings/fixed-spen
     HomeComponent,
     ChartsComponent,
     SpendingsComponent,
-    FixedSpendingsComponent,
+    DataTableComponent,
   ],
   imports: [
     CommonModule,
