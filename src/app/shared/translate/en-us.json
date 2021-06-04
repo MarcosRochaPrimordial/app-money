@@ -18,5 +18,10 @@
     "outgoings": "Outgoings",
     "incomes": "Incomes",
     "total_colon": "Total:",
-    "actions": "Actions"
+    "actions": "Actions",
+    "to_save": "To save",
+    "salary": "Salary",
+    "total_spendings": "Total spendings",
+    "salary_slash_spendings": "Salary/Spendings",
+    "strategic_vision": "Strategic Vision"
 }

@@ -24,8 +24,16 @@ export class UserStorageService {
 
   set language(language: string) {
     if (this.hasUser) {
-      const user = this.user;
+      const user = Object.create(this.user);
       user.language = language;
+      this.user = user;
+    }
+  }
+
+  set currency(currency: string) {
+    if (this.hasUser) {
+      const user = Object.create(this.user);
+      user.currency = currency;
       this.user = user;
     }
   }

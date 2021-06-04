@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-modal-periods',
@@ -14,7 +15,8 @@ export class ModalPeriodsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<ModalPeriodsComponent>
+    public currencyService: CurrencyService,
+    public dialogRef: MatDialogRef<ModalPeriodsComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -24,13 +26,9 @@ export class ModalPeriodsComponent implements OnInit {
   initiateForm() {
     this.form = this.fb.group({
       description: ['', Validators.required],
-      importance: ['', Validators.required],
+      importance: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
-    });
-    this.importance?.valueChanges.subscribe(value => {
-      value = value.replace(/\D/g, '').replace(/^(\d*)(\d{2})/g, "$1,$2");
-      this.importance?.setValue(`R$ ${value}`, { emitEvent: false });
     });
   }
 

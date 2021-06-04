@@ -1,26 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexTitleSubtitle,
-  ApexYAxis,
-  ApexFill,
-  ApexTooltip
-} from "ng-apexcharts";
-
-export type ChartOptions = {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  xaxis: ApexXAxis;
-  yaxis: ApexYAxis | ApexYAxis[];
-  title: ApexTitleSubtitle;
-  labels: string[];
-  stroke: any;
-  dataLabels: any;
-  fill: ApexFill;
-  tooltip: ApexTooltip;
-};
+import { CurrencyService } from 'src/app/shared/services/currency.service';
+import { TranslateService } from 'src/app/shared/services/translate.service';
 
 @Component({
   selector: 'app-charts',
@@ -29,84 +9,53 @@ export type ChartOptions = {
 })
 export class ChartsComponent implements OnInit {
   public budgetChartOptions: any;
-  public totalSpendingChartOptions: any;
 
-  constructor() {
+  constructor(
+    private translateService: TranslateService,
+    private currencyService: CurrencyService,
+  ) {
     this.budgetChartOptions = {
       series: [
         {
-          name: "Final budget",
+          name: this.translateService.translate('budget'),
+          type: "column",
           data: [10, 41, 35, 51, 49, 62]
         },
         {
-          name: "To save",
-          data: [5, 20.5, 17.5, 25.5, 24.5, 31]
+          name: this.translateService.translate('total_spendings'),
+          type: "column",
+          data: [1.1, 3, 3.1, 4, 4.1, 4.9]
+        },
+        {
+          name: this.translateService.translate('salary'),
+          type: "line",
+          data: [20, 50, 48, 60, 70, 80]
         }
       ],
       chart: {
         height: 285,
-        type: "bar",
+        type: "line",
         stacked: true,
       },
+      stroke: {
+        width: [0, 4],
+        curve: 'smooth',
+      },
       title: {
-        text: ""
+        text: this.translateService.translate('strategic_vision'),
       },
       xaxis: {
         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-      }
-    };
-    this.totalSpendingChartOptions = {
-      series: [
-        {
-          name: "Salary",
-          type: "column",
-          data: [201, 352, 752, 320, 257, 160]
-        },
-        {
-          name: "Total spendings",
-          type: "line",
-          data: [201, 352, 752, 320, 257, 160]
-        }
-      ],
-      chart: {
-        height: 285,
-        type: "line"
-      },
-      stroke: {
-        width: [0, 4]
-      },
-      title: {
-        text: ""
       },
       dataLabels: {
         enabled: true,
-        enabledOnSeries: [1]
-      },
-      labels: [
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-        "Jan",
-      ],
-      xaxis: {
-        type: "text"
-      },
-      yaxis: [
-        {
-          title: {
-            text: "Salary"
-          }
+        distributed: true,
+        formatter: (value: number) => {
+          value = value * 100;
+          return `${this.currencyService.currencyType} ${this.currencyService.transform(value)}`;
         },
-        {
-          opposite: true,
-          title: {
-            text: "Total spendings"
-          }
-        }
-      ]
-    }
+      }
+    };
   }
 
   ngOnInit(): void {

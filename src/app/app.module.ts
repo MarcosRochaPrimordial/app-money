@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 import { environment } from 'src/environments/environment';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     SharedModule,
     SocialLoginModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {

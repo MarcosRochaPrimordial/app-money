@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Spendings } from 'src/app/shared/models/Spending.model';
 
 const ELEMENT_DATA_SPENDINGS: Spendings[] = [
-  { description: 'Hydrogen', importance: 3000 },
+  { description: 'Hydrogen', importance: 60000 },
   { description: 'Helium', importance: 3000 },
   { description: 'Lithium', importance: 3000 },
   { description: 'Beryllium', importance: 3000 },

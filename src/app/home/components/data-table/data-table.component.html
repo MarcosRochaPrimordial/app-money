@@ -15,8 +15,10 @@
             </ng-container>
 
             <ng-container matColumnDef="importance">
-                <mat-header-cell *matHeaderCellDef> {{ 'importance' | translate }} </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{ element.importance | currency }} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> {{ 'importance' | translate }}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{ currencyService.currencyType }}{{ element.importance | currency
+                    }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="actions">
@@ -40,7 +42,8 @@
         </mat-table>
     </div>
     <div class="flex font-ubuntu">
-        <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span> R$ 3850,00</div>
+        <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span>{{
+            currencyService.currencyType }}3850,00</div>
         <div class="flex-1">
             <mat-paginator #paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
         </div>

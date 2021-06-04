@@ -31,6 +31,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserComponent } from './components/user/user.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { ModalPeriodsComponent } from './components/modal-periods/modal-periods.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 const exports = [
   MatToolbarModule,
@@ -53,7 +54,8 @@ const exports = [
   MatTableModule,
   MatPaginatorModule,
   MatCheckboxModule,
-  NgApexchartsModule
+  NgApexchartsModule,
+  NgxMaskModule.forChild(),
 ];
 const declarations: any = [
   HeaderComponent,

@@ -16,14 +16,17 @@
                     {{ 'description_required' | translate }}
                 </mat-hint>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="form-width" color="accent"
-                matTooltip="{{ 'net_importance' | translate }}" matTooltipPosition="above">
-                <mat-label>{{ 'importance' | translate }}</mat-label>
-                <input matInput formControlName="importance">
-                <mat-hint *ngIf="importance?.hasError('required') && importance?.touched" class="warn">
-                    {{ 'importance_required' | translate }}
-                </mat-hint>
-            </mat-form-field>
+            <div class="importance form-width">
+                <span class="font-ubuntu">{{ currencyService.currencyType }}&nbsp;</span>
+                <mat-form-field appearance="outline" class="form-width" color="accent"
+                    matTooltip="{{ 'net_importance' | translate }}" matTooltipPosition="above">
+                    <mat-label>{{ 'importance' | translate }}</mat-label>
+                    <input matInput formControlName="importance" mask="0*,00">
+                    <mat-hint *ngIf="importance?.hasError('required') && importance?.touched" class="warn">
+                        {{ 'importance_required' | translate }}
+                    </mat-hint>
+                </mat-form-field>
+            </div>
             <mat-form-field appearance="outline" class="form-width" color="accent" (click)="picker.open()">
                 <mat-label>Enter a date range</mat-label>
                 <mat-date-range-input [rangePicker]="picker">

@@ -30,6 +30,7 @@ export class AuthService {
         name: user.firstName,
         photoUrl: user.photoUrl,
         language: 'enUS',
+        currency: 'U$',
       };
       this.loginSubject.next(true);
       this.router.navigate(['']);

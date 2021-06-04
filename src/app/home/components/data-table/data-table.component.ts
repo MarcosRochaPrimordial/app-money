@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { Spendings } from './../../../shared/models/Spending.model';
 
 @Component({
@@ -19,7 +20,9 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['checkbox', 'description', 'importance', 'actions'];
   dataSource = new MatTableDataSource<Spendings>();
 
-  constructor() { }
+  constructor(
+    public currencyService: CurrencyService,
+  ) { }
 
   ngOnInit(): void {
   }

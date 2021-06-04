@@ -21,7 +21,7 @@
                         {{ period.name }}
                     </span>
                     <span class="font-period-item item-content-item item-budget">
-                        {{ period.budget | currency }}
+                        {{ currencyService.currencyType }}{{ period.budget | currency }}
                     </span>
                     <mat-icon class="item-icon list-icon pointer">subdirectory_arrow_right</mat-icon>
                 </div>
