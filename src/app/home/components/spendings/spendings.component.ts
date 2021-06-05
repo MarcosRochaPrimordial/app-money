@@ -1,30 +1,33 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Spendings } from 'src/app/shared/models/Spending.model';
+import { MatDialog } from '@angular/material/dialog';
+import { Spending } from 'src/app/shared/models/Spending.model';
+import { ModalSheetImportComponent } from '../modal-sheet-import/modal-sheet-import.component';
+import { ModalSpendingsComponent } from '../modal-spendings/modal-spendings.component';
 
-const ELEMENT_DATA_SPENDINGS: Spendings[] = [
-  { description: 'Hydrogen', importance: 60000 },
-  { description: 'Helium', importance: 3000 },
-  { description: 'Lithium', importance: 3000 },
-  { description: 'Beryllium', importance: 3000 },
-  { description: 'Boron', importance: 3000 },
-  { description: 'Carbon', importance: 3000 },
+const ELEMENT_DATA_SPENDINGS: Spending[] = [
+  { id: '1', description: 'Hydrogen', importance: 60000 },
+  { id: '2', description: 'Helium', importance: 3000 },
+  { id: '3', description: 'Lithium', importance: 3000 },
+  { id: '4', description: 'Beryllium', importance: 3000 },
+  { id: '5', description: 'Boron', importance: 3000 },
+  { id: '6', description: 'Carbon', importance: 3000 },
 ];
-const ELEMENT_DATA_OUTGOINGS: Spendings[] = [
-  { description: 'Carbon', importance: 3000 },
-  { description: 'Nitrogen', importance: 3000 },
-  { description: 'Oxygen', importance: 3000 },
+const ELEMENT_DATA_OUTGOINGS: Spending[] = [
+  { id: '7', description: 'Carbon', importance: 3000 },
+  { id: '8', description: 'Nitrogen', importance: 3000 },
+  { id: '9', description: 'Oxygen', importance: 3000 },
 ];
-const ELEMENT_DATA_INCOMES: Spendings[] = [
-  { description: 'Hydrogen', importance: 3000 },
-  { description: 'Helium', importance: 3000 },
-  { description: 'Lithium', importance: 3000 },
-  { description: 'Beryllium', importance: 3000 },
-  { description: 'Boron', importance: 3000 },
-  { description: 'Carbon', importance: 3000 },
-  { description: 'Nitrogen', importance: 3000 },
-  { description: 'Oxygen', importance: 3000 },
-  { description: 'Fluorine', importance: 3000 },
-  { description: 'Neon', importance: 3000 },
+const ELEMENT_DATA_INCOMES: Spending[] = [
+  { id: '10', description: 'Hydrogen', importance: 3000 },
+  { id: '11', description: 'Helium', importance: 3000 },
+  { id: '12', description: 'Lithium', importance: 3000 },
+  { id: '13', description: 'Beryllium', importance: 3000 },
+  { id: '14', description: 'Boron', importance: 3000 },
+  { id: '15', description: 'Carbon', importance: 3000 },
+  { id: '16', description: 'Nitrogen', importance: 3000 },
+  { id: '17', description: 'Oxygen', importance: 3000 },
+  { id: '18', description: 'Fluorine', importance: 3000 },
+  { id: '19', description: 'Neon', importance: 3000 },
 ];
 
 @Component({
@@ -41,12 +44,14 @@ export class SpendingsComponent implements OnInit {
   @ViewChild('outgoings_button', { static: true }) outgoings_button!: ElementRef;
   @ViewChild('incomes_button', { static: true }) incomes_button!: ElementRef;
 
-  public fixedSpendings: Spendings[] = ELEMENT_DATA_SPENDINGS;
-  public outgoings: Spendings[] = ELEMENT_DATA_OUTGOINGS;
-  public incomes: Spendings[] = ELEMENT_DATA_INCOMES;
+  public fixedSpendings: Spending[] = ELEMENT_DATA_SPENDINGS;
+  public outgoings: Spending[] = ELEMENT_DATA_OUTGOINGS;
+  public incomes: Spending[] = ELEMENT_DATA_INCOMES;
 
 
-  constructor() { }
+  constructor(
+    private modal: MatDialog,
+  ) { }
 
   ngOnInit(): void {
     this.fixed_spendings_view.nativeElement.style.display = "block";
@@ -74,6 +79,18 @@ export class SpendingsComponent implements OnInit {
         break;
     }
     evt.currentTarget.className += " active";
+  }
+
+  openSpendingModal() {
+    this.modal.open(ModalSpendingsComponent, {
+      width: '450px'
+    });
+  }
+
+  openSheetImport() {
+    this.modal.open(ModalSheetImportComponent, {
+      width: '450px'
+    });
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-period-info',
@@ -9,7 +10,9 @@ export class PeriodInfoComponent implements OnInit {
 
   date = new Date();
 
-  constructor() { }
+  constructor(
+    public currencyService: CurrencyService,
+  ) { }
 
   ngOnInit(): void {
   }

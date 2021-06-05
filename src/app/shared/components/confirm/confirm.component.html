@@ -1,0 +1,13 @@
+<div class="flex">
+    <h1>{{ data.title }}</h1>
+</div>
+<div class="flex flex-center font-ubuntu message">{{ data.message }}</div>
+<div class="flex">
+    <button mat-raised-button color="accent" (click)="dialogRef.close(true)">
+        {{ data.labelBtnLeft }}
+    </button>
+    <div class="spacer"></div>
+    <button mat-raised-button color="accent" (click)="dialogRef.close(false)">
+        {{ data.labelBtnRight }}
+    </button>
+</div>

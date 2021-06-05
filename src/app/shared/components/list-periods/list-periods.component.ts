@@ -14,7 +14,8 @@ export class ListPeriodsComponent implements OnInit {
 
   active = null;
   periods: Period[] = [
-    { budget: 15000, endDate: new Date(), startDate: new Date(), name: 'January' },
+    { id: 'çl234kj5rl-4534k', importance: 15000, endDate: new Date(), startDate: new Date(), name: 'January' },
+    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'Febuary' },
   ];
 
   constructor(
@@ -25,9 +26,10 @@ export class ListPeriodsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModalAddPeriod() {
+  openModalAddPeriod(period?: Period) {
     this.modal.open(ModalPeriodsComponent, {
       width: '450px',
+      data: period,
     });
   }
 

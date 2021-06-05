@@ -29,7 +29,7 @@ export class AuthService {
         email: user.email,
         name: user.firstName,
         photoUrl: user.photoUrl,
-        language: 'enUS',
+        language: 'en',
         currency: 'U$',
       };
       this.loginSubject.next(true);

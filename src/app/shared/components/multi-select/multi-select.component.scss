@@ -1,0 +1,9 @@
+@import './../../../../style-variables.scss';
+
+.multi-select-container {
+    border: 1px solid $border-principal;
+    border-radius: 6px;
+    height: 100px;
+    padding: 5px;
+    overflow-y: auto;
+}

@@ -23,5 +23,18 @@
     "salary": "Salary",
     "total_spendings": "Total spendings",
     "salary_slash_spendings": "Salary/Spendings",
-    "strategic_vision": "Strategic Vision"
+    "strategic_vision": "Strategic Vision",
+    "import_sheet": "Import sheet",
+    "language": "Language",
+    "currency": "Currency",
+    "add_spending": "Add Spending",
+    "edit_spending": "Edit Spending",
+    "copy": "Copy",
+    "text_import_sheet": "If you import a file, you will lose all data saved before.",
+    "understand": "I understand",
+    "import": "Import",
+    "are_you_sure_dot": "Are you sure...?",
+    "all_data_will_be_deleted": "On confirms, data will be removed. Are you sure?",
+    "yes": "Yes",
+    "no": "No"
 }

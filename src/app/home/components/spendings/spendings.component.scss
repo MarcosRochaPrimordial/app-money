@@ -7,25 +7,37 @@
     right: 0;
     height: calc(100% - 300px);
     .tab {
-        button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
-            background-color: $principal;
-            color: #fff;
-            border-radius: 7px 7px 0 0;
+        display: flex;
+        .left-btns {
+            button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+                background-color: $principal;
+                color: #fff;
+                border-radius: 7px 7px 0 0;
+            }
+            button:hover {
+                background-color: #777777;
+            }
+            button.active {
+                background-color: $primary;
+                color: #fff;
+            }
         }
-        button:hover {
-            background-color: #777777;
-        }
-        button.active {
-            background-color: $primary;
-            color: #fff;
+        .right-buttons {
+            a {
+                color: blue;
+                text-decoration: underline;
+            }
+            button {
+                margin-left: 10px;
+            }
         }
     }
     .container-tabs {

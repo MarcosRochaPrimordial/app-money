@@ -16,12 +16,12 @@
                 matTooltip="{{ period.startDate | date:'dd/MM/yyyy' }} - {{ period.endDate | date:'dd/MM/yyyy'}}"
                 [class.period-item-active]="active === i">
                 <div class="period-item-content font-ubuntu">
-                    <mat-icon class="item-icon list-icon pointer">edit</mat-icon>
+                    <mat-icon class="item-icon list-icon pointer" (click)="openModalAddPeriod(period)">edit</mat-icon>
                     <span class="font-period-item item-content-item item-name">
                         {{ period.name }}
                     </span>
                     <span class="font-period-item item-content-item item-budget">
-                        {{ currencyService.currencyType }}{{ period.budget | currency }}
+                        {{ currencyService.currencyType }}{{ period.importance | currency }}
                     </span>
                     <mat-icon class="item-icon list-icon pointer">subdirectory_arrow_right</mat-icon>
                 </div>

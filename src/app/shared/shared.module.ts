@@ -24,6 +24,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { ListPeriodsComponent } from './components/list-periods/list-periods.component';
 import { PeriodInfoComponent } from './components/period-info/period-info.component';
@@ -31,7 +34,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { UserComponent } from './components/user/user.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { ModalPeriodsComponent } from './components/modal-periods/modal-periods.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 const exports = [
   MatToolbarModule,
@@ -55,6 +59,8 @@ const exports = [
   MatPaginatorModule,
   MatCheckboxModule,
   NgApexchartsModule,
+  MatSelectModule,
+  MatButtonToggleModule,
   NgxMaskModule.forChild(),
 ];
 const declarations: any = [
@@ -67,6 +73,8 @@ const declarations: any = [
   ModalPeriodsComponent,
   TranslatePipe,
   CurrencyPipe,
+  MultiSelectComponent,
+  ConfirmComponent,
 ];
 
 @NgModule({

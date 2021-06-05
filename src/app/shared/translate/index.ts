@@ -1,7 +1,7 @@
 import enUSjson from './en-us.json';
 
-const enUS = enUSjson;
+const en = enUSjson;
 
 export {
-    enUS,
+    en,
 }

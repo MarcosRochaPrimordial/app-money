@@ -7,6 +7,9 @@ import { SharedModule } from '../shared/shared.module';
 import { ChartsComponent } from './components/charts/charts.component';
 import { SpendingsComponent } from './components/spendings/spendings.component';
 import { DataTableComponent } from './components/data-table/data-table.component';
+import { ModalSpendingsComponent } from './components/modal-spendings/modal-spendings.component';
+import { ModalCopyComponent } from './components/modal-copy/modal-copy.component';
+import { ModalSheetImportComponent } from './components/modal-sheet-import/modal-sheet-import.component';
 
 
 @NgModule({
@@ -15,6 +18,9 @@ import { DataTableComponent } from './components/data-table/data-table.component
     ChartsComponent,
     SpendingsComponent,
     DataTableComponent,
+    ModalSpendingsComponent,
+    ModalCopyComponent,
+    ModalSheetImportComponent,
   ],
   imports: [
     CommonModule,

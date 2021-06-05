@@ -1,4 +1,4 @@
-<div class="form-modal">
+<div class="flex flex-column modal">
     <div class="form-modal-header">
         <h2 class="label font-ubuntu"> {{ (!periodId ? 'add_period' : 'edit_period') | translate }} </h2>
         <button mat-mini-fab color="accent" class="close-button" (click)="dialogRef.close()">
@@ -11,8 +11,8 @@
         <form class="form" [formGroup]="form">
             <mat-form-field appearance="outline" class="form-width" color="accent">
                 <mat-label>{{ 'description' | translate }}</mat-label>
-                <input matInput formControlName="description">
-                <mat-hint *ngIf="description?.hasError('required') && description?.touched" class="warn">
+                <input matInput formControlName="name">
+                <mat-hint *ngIf="name?.hasError('required') && name?.touched" class="warn">
                     {{ 'description_required' | translate }}
                 </mat-hint>
             </mat-form-field>

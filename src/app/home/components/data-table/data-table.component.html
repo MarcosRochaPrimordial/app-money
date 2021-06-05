@@ -24,13 +24,13 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> {{ 'actions' | translate }} </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-button>
+                    <button mat-button (click)="editCurrent(element)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-button>
+                    <button mat-button (click)="deleteElement(element.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
-                    <button mat-button>
+                    <button mat-button (click)="copyCurrent(element)">
                         <mat-icon>content_copy</mat-icon>
                     </button>
                 </mat-cell>
@@ -41,8 +41,8 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
     </div>
-    <div class="flex font-ubuntu">
-        <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span>{{
+    <div class="flex font-ubuntu footer">
+        <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span> {{
             currencyService.currencyType }}3850,00</div>
         <div class="flex-1">
             <mat-paginator #paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>

@@ -1,6 +1,8 @@
 export interface Period {
+    id: string;
     name: string;
     startDate: Date;
     endDate: Date;
-    budget: number;
+    importance: number;
+    checked?: boolean;
 }

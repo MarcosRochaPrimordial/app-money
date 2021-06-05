@@ -18,28 +18,16 @@ export class ChartsComponent implements OnInit {
       series: [
         {
           name: this.translateService.translate('budget'),
-          type: "column",
-          data: [10, 41, 35, 51, 49, 62]
+          data: [1.1, 3, 3.1, 4, 4.1, 4.9],
         },
         {
           name: this.translateService.translate('total_spendings'),
-          type: "column",
-          data: [1.1, 3, 3.1, 4, 4.1, 4.9]
+          data: [10, 41, 35, 51, 49, 62],
         },
-        {
-          name: this.translateService.translate('salary'),
-          type: "line",
-          data: [20, 50, 48, 60, 70, 80]
-        }
       ],
       chart: {
         height: 285,
-        type: "line",
-        stacked: true,
-      },
-      stroke: {
-        width: [0, 4],
-        curve: 'smooth',
+        type: "bar",
       },
       title: {
         text: this.translateService.translate('strategic_vision'),
@@ -47,9 +35,20 @@ export class ChartsComponent implements OnInit {
       xaxis: {
         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
       },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: "top"
+          }
+        }
+      },
       dataLabels: {
         enabled: true,
-        distributed: true,
+        style: {
+          fontSize: "12px",
+          colors: ["#304758"]
+        },
+        offsetY: -20,
         formatter: (value: number) => {
           value = value * 100;
           return `${this.currencyService.currencyType} ${this.currencyService.transform(value)}`;

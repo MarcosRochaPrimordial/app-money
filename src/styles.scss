@@ -65,6 +65,14 @@ body { margin: 0; }
   display: flex;
 }
 
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
 .flex-column {
   flex-direction: column;
 }
@@ -73,13 +81,67 @@ body { margin: 0; }
   flex: 1;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
+.align-itens-center {
+  align-items: center;
+}
+
 //app-money margins
 .mt-10 {
   margin-top: 10px;
 }
 
 .mt-5 {
-  margin-top: 5pt;
+  margin-top: 5px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+//app-money modal
+.modal {
+  .form-modal-header {
+    display: flex;
+    width: 100%;
+    .label {
+        flex: 9;
+        margin: auto;
+    }
+    .close-button {
+        flex: 1;
+        margin: auto;
+    }
+  }
+  
+  .form-modal-content {
+    margin-top: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .importance {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+          flex: 1;
+          margin-bottom: 20px;
+      }
+      mat-form-field {
+          flex: 9;
+      }
+    }
+    .form-width {
+        width: 80%;
+        min-height: 50px;
+    }
+  }
 }
 
 //scrollbar
@@ -89,7 +151,6 @@ body { margin: 0; }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
@@ -99,7 +160,6 @@ body { margin: 0; }
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: rgba(110, 110, 110, 0.8); 
-  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(110, 110, 110, 0.8); 

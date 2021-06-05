@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Period } from '../../models/Period.model';
 import { CurrencyService } from '../../services/currency.service';
 
 @Component({
@@ -10,30 +11,35 @@ import { CurrencyService } from '../../services/currency.service';
 })
 export class ModalPeriodsComponent implements OnInit {
 
-  periodId = null;
+  periodId: string = '';
   form: FormGroup = this.fb.group({});
 
   constructor(
     private fb: FormBuilder,
     public currencyService: CurrencyService,
     public dialogRef: MatDialogRef<ModalPeriodsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Period,
   ) { }
 
   ngOnInit(): void {
     this.initiateForm();
+    if (!!this.data) {
+      this.periodId = this.data.id;
+      this.form.patchValue(this.data);
+    }
   }
 
   initiateForm() {
     this.form = this.fb.group({
-      description: ['', Validators.required],
+      name: ['', Validators.required],
       importance: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
     });
   }
 
-  get description() {
-    return this.form.get('description');
+  get name() {
+    return this.form.get('name');
   }
 
   get importance() {
