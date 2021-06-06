@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Period } from 'src/app/shared/models/Period.model';
+import { Period, PeriodBase } from 'src/app/shared/models/Period.model';
 import { UserRepositoryService } from './user-repository.service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -28,17 +29,19 @@ export class PeriodRepositoryService {
   getPeriodsByUserId(userId: string) {
     const userDoc = this.userRepository.userDoc(userId);
     return this.firestore
-      .collection<Period>(this.PERIOD_COLLECTION, ref => ref.where('user', '==', userDoc))
+      .collection<PeriodBase>(this.PERIOD_COLLECTION, ref => ref
+        .where('user', '==', userDoc)
+        .orderBy('startDate', 'asc'))
       .snapshotChanges()
       .pipe(map(this.toPeriod));
   }
 
-  toPeriod(docs: DocumentChangeAction<Period>[]): Period[] {
-    return docs.map(doc => {
-      return {
-        id: doc.payload.doc.id,
-        ...doc.payload.doc.data(),
-      } as Period
-    });
+  toPeriod(docs: DocumentChangeAction<PeriodBase>[]): Period[] {
+    return docs.map(doc => ({
+      id: doc.payload.doc.id,
+      ...doc.payload.doc.data(),
+      startDate: doc.payload.doc.data().startDate.toDate(),
+      endDate: doc.payload.doc.data().endDate.toDate()
+    }) as Period);
   }
 }

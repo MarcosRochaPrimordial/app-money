@@ -9,3 +9,12 @@ export interface Period {
     importance: number;
     user: DocumentReference<User>;
 }
+
+export interface PeriodBase {
+    id?: string;
+    name: string;
+    startDate: firebase.default.firestore.Timestamp;
+    endDate: firebase.default.firestore.Timestamp;
+    importance: number;
+    user: DocumentReference<User>;
+}
