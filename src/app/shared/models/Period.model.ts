@@ -1,10 +1,11 @@
-import { Spending } from "./Spending.model";
+import { DocumentReference } from "@angular/fire/firestore";
+import { User } from "./User.model";
 
 export interface Period {
-    id: string;
+    id?: string;
     name: string;
     startDate: Date;
     endDate: Date;
     importance: number;
-    spendings?: Spending[];
+    user: DocumentReference<User>;
 }

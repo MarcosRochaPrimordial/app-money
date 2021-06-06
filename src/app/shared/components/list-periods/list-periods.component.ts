@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PeriodRepositoryService } from 'src/app/core/repositories/period-repository.service';
 
 import { Period } from '../../models/Period.model';
 import { CurrencyService } from '../../services/currency.service';
+import { UserStorageService } from '../../services/user-storage.service';
 import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component';
 
 @Component({
@@ -13,17 +15,21 @@ import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component'
 export class ListPeriodsComponent implements OnInit {
 
   active = null;
-  periods: Period[] = [
-    { id: 'çl234kj5rl-4534k', importance: 15000, endDate: new Date(), startDate: new Date(), name: 'January' },
-    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'Febuary' },
-  ];
+  periods: Period[] = [];
 
   constructor(
     private modal: MatDialog,
+    private periodRepository: PeriodRepositoryService,
+    private userStorage: UserStorageService,
     public currencyService: CurrencyService,
   ) { }
 
   ngOnInit(): void {
+    this.periodRepository
+      .getPeriodsByUserId(this.userStorage.user.id!)
+      .subscribe((periods: Period[]) => {
+        this.periods = periods;
+      });
   }
 
   openModalAddPeriod(period?: Period) {

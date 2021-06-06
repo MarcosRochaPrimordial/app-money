@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
-import { User } from '../models/User.model';
+import { User } from '../../shared/models/User.model';
 import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RepositoryService {
+export class UserRepositoryService {
 
-  private USER_COLLECTION = 'userCollection';
+  private USER_COLLECTION = 'users';
 
   constructor(
     private firestore: AngularFirestore,
@@ -34,6 +34,10 @@ export class RepositoryService {
 
   updateUser(user: User) {
     return this.firestore.doc(`${this.USER_COLLECTION}/${user.id}`).update(user);
+  }
+
+  userDoc(userId: string) {
+    return this.firestore.collection<User>(this.USER_COLLECTION).doc(userId).ref;
   }
 
   toUser(docs: DocumentChangeAction<User>[]): User {

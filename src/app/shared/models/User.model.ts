@@ -1,5 +1,3 @@
-import { Period } from "./Period.model";
-
 export interface User {
     id?: string;
     googleId: string;
@@ -8,5 +6,4 @@ export interface User {
     language: string;
     currency: string;
     photoUrl: string;
-    periods?: Period[];
 }

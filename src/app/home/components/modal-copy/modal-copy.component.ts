@@ -16,13 +16,7 @@ export class ModalCopyComponent implements OnInit {
   @ViewChild('periodSelect', { static: false }) periodSelect!: MatSelectionList;
 
   form: FormGroup = this.fb.group({});
-  periods: Period[] = [
-    { id: 'çl234kj5rl-4534k', importance: 15000, endDate: new Date(), startDate: new Date(), name: 'Febuary' },
-    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'March' },
-    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'April' },
-    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'May' },
-    { id: '2kj43uh5jh4-2k3j', importance: 16000, endDate: new Date(), startDate: new Date(), name: 'June' },
-  ];
+  periods: Period[] = [];
 
   constructor(
     private fb: FormBuilder,

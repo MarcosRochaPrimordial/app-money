@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/User.model';
-import { RepositoryService } from './repository.service';
+import { UserRepositoryService } from '../../core/repositories/user-repository.service';
 import { UserStorageService } from './user-storage.service';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AuthService {
     private socialService: SocialAuthService,
     private userStorage: UserStorageService,
     private router: Router,
-    private repository: RepositoryService,
+    private userRepository: UserRepositoryService,
   ) { }
 
   get logged() {
@@ -26,26 +26,45 @@ export class AuthService {
   }
 
   signin() {
-    this.socialService.authState.subscribe(user => {
+    this.loginWithGoogle();
+    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  private loginWithGoogle() {
+    this.socialService.authState.subscribe(googleUser => {
       this.userStorage.user = {
-        googleId: user.id,
-        email: user.email,
-        name: user.firstName,
-        photoUrl: user.photoUrl,
+        googleId: googleUser.id,
+        email: googleUser.email,
+        name: googleUser.firstName,
+        photoUrl: googleUser.photoUrl,
         language: 'en',
         currency: 'U$',
       };
-      const subscription = this.repository.getUserByGoogleId(user.id)
-        .subscribe((user: User) => {
-          if (!user) {
-            this.repository.createUser(this.userStorage.user);
-          }
-          subscription.unsubscribe();
-        });
-      this.loginSubject.next(true);
-      this.router.navigate(['']);
+      this.loginFirebase(googleUser.id);
     });
-    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  private loginFirebase(googleId: string) {
+    const userByGoogleId = this.userRepository.getUserByGoogleId(googleId)
+      .subscribe((user: User) => {
+        if (!user) {
+          this.signup();
+          this.loginFirebase(googleId);
+        } else {
+          this.userStorage.id = user.id;
+          this.enter();
+        }
+        userByGoogleId.unsubscribe();
+      });
+  }
+
+  private signup() {
+    this.userRepository.createUser(this.userStorage.user);
+  }
+
+  private enter() {
+    this.router.navigate(['']);
+    this.loginSubject.next(true);
   }
 
   singout() {
