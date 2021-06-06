@@ -19,7 +19,7 @@ export class UserStorageService {
   }
 
   get hasUser(): boolean {
-    return !!this.user.id;
+    return !!this.user.googleId || !!this.user.id;
   }
 
   set language(language: string) {
