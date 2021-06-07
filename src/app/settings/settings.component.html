@@ -1,0 +1,38 @@
+<mat-card>
+    <form [formGroup]="form">
+        <div class="flex flex-center">
+            <h1>Settings</h1>
+        </div>
+        <div class="flex flex-column flex-center">
+            <div class="flex flex-center">
+                <mat-form-field appearance="outline" class="form-width">
+                    <mat-label>{{ 'language' | translate }}</mat-label>
+                    <mat-select formControlName="language">
+                        <mat-option value="en">English</mat-option>
+                        <mat-option value="pt">Portugues</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex flex-center">
+                <mat-form-field appearance="outline" class="form-width">
+                    <mat-label>{{ 'currency' | translate }}</mat-label>
+                    <mat-select formControlName="currency">
+                        <mat-option value="U$">U$</mat-option>
+                        <mat-option value="R$">R$</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex flex-center">
+                <button [disabled]="form.invalid" mat-flat-button color="accent" class="form-width btn-form"
+                    (click)="saveSettings()">
+                    {{ 'save' | translate }}
+                </button>
+            </div>
+            <div class="flex flex-center">
+                <button mat-button class="form-width btn-form" routerLink="../">
+                    {{ 'cancel' | translate }}
+                </button>
+            </div>
+        </div>
+    </form>
+</mat-card>

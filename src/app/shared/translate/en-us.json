@@ -19,10 +19,7 @@
     "incomes": "Incomes",
     "total_colon": "Total:",
     "actions": "Actions",
-    "to_save": "To save",
-    "salary": "Salary",
     "total_spendings": "Total spendings",
-    "salary_slash_spendings": "Salary/Spendings",
     "strategic_vision": "Strategic Vision",
     "import_sheet": "Import sheet",
     "language": "Language",
@@ -36,5 +33,7 @@
     "are_you_sure_dot": "Are you sure...?",
     "all_data_will_be_deleted": "On confirms, data will be removed. Are you sure?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "cancel": "Cancel",
+    "select_date_range": "Select a date range"
 }

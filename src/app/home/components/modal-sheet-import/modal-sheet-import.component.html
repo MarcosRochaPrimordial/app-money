@@ -1,6 +1,6 @@
 <div class="flex flex-column modal">
     <div class="form-modal-header">
-        <h2 class="label font-ubuntu"> {{ 'copy' | translate }} </h2>
+        <h2 class="label font-ubuntu"> {{ 'import' | translate }} </h2>
         <button mat-mini-fab color="accent" class="close-button" (click)="dialogRef.close()">
             <mat-icon>
                 close
@@ -10,7 +10,7 @@
     <div class="form-modal-content">
         <form class="form" [formGroup]="form">
             <input type="file" (change)="fileChange($event)">
-            <p class="font-ubuntu">{{ 'text_import_sheet' | translate }}</p>
+            <p class="font-ubuntu main-text">{{ 'text_import_sheet' | translate }}</p>
             <p>
                 <mat-checkbox formControlName="understand">
                     <span class="font-ubuntu">

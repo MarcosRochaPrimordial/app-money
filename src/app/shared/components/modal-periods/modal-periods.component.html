@@ -28,7 +28,7 @@
                 </mat-form-field>
             </div>
             <mat-form-field appearance="outline" class="form-width" color="accent" (click)="picker.open()">
-                <mat-label>Enter a date range</mat-label>
+                <mat-label>{{ 'select_date_range' | translate}}</mat-label>
                 <mat-date-range-input [rangePicker]="picker">
                     <input matStartDate placeholder="Start date" formControlName="startDate" readonly>
                     <input matEndDate placeholder="End date" formControlName="endDate" readonly>

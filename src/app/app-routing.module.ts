@@ -14,6 +14,12 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
+  {
+    path: 'settings',
+    pathMatch: 'full',
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+  }
 ];
 
 @NgModule({

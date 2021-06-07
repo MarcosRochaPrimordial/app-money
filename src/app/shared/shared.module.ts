@@ -36,6 +36,7 @@ import { CurrencyPipe } from './pipes/currency.pipe';
 import { ModalPeriodsComponent } from './components/modal-periods/modal-periods.component';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { RouterModule } from '@angular/router';
 
 const exports = [
   MatToolbarModule,
@@ -81,6 +82,7 @@ const declarations: any = [
   declarations: declarations,
   imports: [
     CommonModule,
+    RouterModule,
     ...exports,
   ],
   exports: [
