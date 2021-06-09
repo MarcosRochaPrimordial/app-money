@@ -1,8 +1,10 @@
+import { DocumentReference } from "@angular/fire/firestore";
 import { Period } from "./Period.model";
 
 export interface Spending {
-    id: string;
+    id?: string;
     description: string;
     importance: number;
-    period: Period;
+    paid: boolean;
+    period: DocumentReference<Period>;
 }

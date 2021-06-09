@@ -36,6 +36,10 @@ export class PeriodRepositoryService {
       .pipe(map(this.toPeriod));
   }
 
+  periodDoc(periodId: string) {
+    return this.firestore.collection<Period>(this.PERIOD_COLLECTION).doc(periodId).ref;
+  }
+
   toPeriod(docs: DocumentChangeAction<PeriodBase>[]): Period[] {
     return docs.map(doc => ({
       id: doc.payload.doc.id,

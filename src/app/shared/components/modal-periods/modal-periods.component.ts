@@ -13,7 +13,6 @@ import { UserStorageService } from '../../services/user-storage.service';
 })
 export class ModalPeriodsComponent implements OnInit {
 
-  periodId: string = '';
   form: FormGroup = this.fb.group({});
 
   constructor(
@@ -28,18 +27,22 @@ export class ModalPeriodsComponent implements OnInit {
   ngOnInit(): void {
     this.initiateForm();
     if (!!this.data) {
-      this.periodId = this.data.id!;
       this.form.patchValue(this.data);
     }
   }
 
   initiateForm() {
     this.form = this.fb.group({
+      id: [null],
       name: ['', Validators.required],
       importance: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
     });
+  }
+
+  get id() {
+    return this.form.get('id');
   }
 
   get name() {
@@ -60,16 +63,16 @@ export class ModalPeriodsComponent implements OnInit {
 
   savePeriod() {
     const form = this.formatForm();
-    if (!this.periodId) {
-      this.periodRepository.createPeriod(form, this.userStorage.user.id!);
-    } else {
+    if (!!this.id?.value) {
       this.periodRepository.updatePeriod(form);
+    } else {
+      this.periodRepository.createPeriod(form, this.userStorage.user.id!);
     }
     this.dialogRef.close();
   }
 
   formatForm(): Period {
-    const form = this.form.getRawValue();
+    const form = this.form.getRawValue() as Period;
     return {
       ...form,
       importance: parseInt(form.importance.toString().replace(',', '.')),
