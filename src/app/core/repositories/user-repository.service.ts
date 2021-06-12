@@ -43,8 +43,8 @@ export class UserRepositoryService {
   toUser(docs: DocumentChangeAction<User>[]): User {
     return docs.map(doc => {
       return {
+        ...doc.payload.doc.data(),
         id: doc.payload.doc.id,
-        ...doc.payload.doc.data()
       } as User;
     })[0];
   }

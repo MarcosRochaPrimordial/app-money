@@ -39,6 +39,9 @@ export class ModalPeriodsComponent implements OnInit {
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
     });
+    this.importance?.valueChanges.subscribe(value => {
+      this.importance?.setValue(this.currencyService.liveTransform(value), { emitEvent: false });
+    });
   }
 
   get id() {
@@ -66,17 +69,18 @@ export class ModalPeriodsComponent implements OnInit {
     if (!!this.id?.value) {
       this.periodRepository.updatePeriod(form);
     } else {
+      delete form.id;
       this.periodRepository.createPeriod(form, this.userStorage.user.id!);
     }
     this.dialogRef.close();
   }
 
   formatForm(): Period {
-    const form = this.form.getRawValue() as Period;
+    const form = this.form.getRawValue();
     return {
       ...form,
-      importance: parseInt(form.importance.toString().replace(',', '.')),
-    }
+      importance: parseInt(form.importance.toString().replace(',', '')),
+    } as Period;
   }
 
 }

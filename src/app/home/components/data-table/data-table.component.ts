@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SpendingRepositoryService } from 'src/app/core/repositories/spending-repository.service';
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
@@ -20,16 +21,21 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     this.dataSource.data = _elements;
   }
   @Input() type!: string;
+  @Input() set total(total: number) {
+    this._total = this.currencyService.transform(total);
+  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = ['checkbox', 'description', 'importance', 'actions'];
   dataSource = new MatTableDataSource<Spending>();
+  _total: string = '';
 
   constructor(
     public currencyService: CurrencyService,
     private modal: MatDialog,
     private translateService: TranslateService,
+    private spendingRepository: SpendingRepositoryService,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +62,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteElement(id: string) {
+  deleteElement(spending: Spending) {
     const dialogMessage = this.modal.open(ConfirmComponent, {
       width: '450px',
       data: {
@@ -68,8 +74,15 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
 
     dialogMessage.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result) {
+        this.spendingRepository.deleteSpending(spending);
+      }
     });
+  }
+
+  markAsPaid(event: any, spending: Spending) {
+    spending.paid = event.checked;
+    this.spendingRepository.updateSpending(spending);
   }
 
 }

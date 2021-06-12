@@ -1,12 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActualPeriodService } from 'src/app/core/services/actual-period.service';
+import { SpendingService } from 'src/app/core/services/spending.service';
 import { Spending } from 'src/app/shared/models/Spending.model';
 import { ModalSheetImportComponent } from '../modal-sheet-import/modal-sheet-import.component';
 import { ModalSpendingsComponent } from '../modal-spendings/modal-spendings.component';
-
-const ELEMENT_DATA_SPENDINGS: Spending[] = [];
-const ELEMENT_DATA_OUTGOINGS: Spending[] = [];
-const ELEMENT_DATA_INCOMES: Spending[] = [];
 
 @Component({
   selector: 'app-spendings',
@@ -22,18 +20,59 @@ export class SpendingsComponent implements OnInit {
   @ViewChild('outgoings_button', { static: true }) outgoings_button!: ElementRef;
   @ViewChild('incomes_button', { static: true }) incomes_button!: ElementRef;
 
-  public fixedSpendings: Spending[] = ELEMENT_DATA_SPENDINGS;
-  public outgoings: Spending[] = ELEMENT_DATA_OUTGOINGS;
-  public incomes: Spending[] = ELEMENT_DATA_INCOMES;
-
+  public fixedSpendings: Spending[] = [];
+  public totalFixedSpendings: number = 0;
+  public outgoings: Spending[] = [];
+  public totalOutgoings: number = 0;
+  public incomes: Spending[] = [];
+  public totalIncomes: number = 0;
+  public periodId: string = '';
 
   constructor(
     private modal: MatDialog,
+    private actualPeriodService: ActualPeriodService,
+    private spendingService: SpendingService,
   ) { }
 
   ngOnInit(): void {
     this.fixed_spendings_view.nativeElement.style.display = "block";
     this.fixed_spendings_button.nativeElement.className += " active";
+    this.actualPeriodService.period.subscribe(period => {
+      this.periodId = period.id!;
+      this.loadFixedSpendings();
+      this.loadOutgoings();
+      this.loadIncomes();
+    });
+  }
+
+  loadFixedSpendings() {
+    this.spendingService
+      .getFixedSpendings(this.periodId)
+      .subscribe(spendings => {
+        this.fixedSpendings = spendings;
+        this.totalFixedSpendings = this.fixedSpendings
+          .reduce((acc, curr) => acc += curr.importance, 0);
+      });
+  }
+
+  loadOutgoings() {
+    this.spendingService
+      .getOutgoings(this.periodId)
+      .subscribe(spendings => {
+        this.outgoings = spendings;
+        this.totalOutgoings = this.outgoings
+          .reduce((acc, curr) => acc += curr.importance, 0)
+      });
+  }
+
+  loadIncomes() {
+    this.spendingService
+      .getIncomes(this.periodId)
+      .subscribe(spendings => {
+        this.incomes = spendings;
+        this.totalIncomes = this.incomes
+          .reduce((acc, curr) => acc += curr.importance, 0);
+      });
   }
 
   openTab(evt: any, tab: string) {
@@ -61,7 +100,10 @@ export class SpendingsComponent implements OnInit {
 
   openSpendingModal() {
     this.modal.open(ModalSpendingsComponent, {
-      width: '450px'
+      width: '450px',
+      data: {
+        periodId: this.periodId,
+      }
     });
   }
 

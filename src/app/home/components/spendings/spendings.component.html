@@ -20,15 +20,16 @@
     </div>
     <div class="container-tabs">
         <div #fixed_spendings_view class="tab-content font-ubuntu">
-            <app-data-table [elements]="fixedSpendings" type="fixed_spendings"></app-data-table>
+            <app-data-table [elements]="fixedSpendings" [total]="totalFixedSpendings" type="fixed_spendings">
+            </app-data-table>
         </div>
 
         <div #outgoings_view class="tab-content font-ubuntu">
-            <app-data-table [elements]="outgoings" type="outgoings"></app-data-table>
+            <app-data-table [elements]="outgoings" [total]="totalOutgoings" type="outgoings"></app-data-table>
         </div>
 
         <div #incomes_view class="tab-content font-ubuntu">
-            <app-data-table [elements]="incomes" type="incomes"></app-data-table>
+            <app-data-table [elements]="incomes" [total]="totalIncomes" type="incomes"></app-data-table>
         </div>
     </div>
 </div>

@@ -16,29 +16,33 @@ export class SpendingRepositoryService {
     private periodRepository: PeriodRepositoryService,
   ) { }
 
-  createPeriod(spending: Spending, periodId: string) {
+  public createSpending(spending: Spending, periodId: string) {
     spending.period = this.periodRepository.periodDoc(periodId);
-    return this.firestore.collection(this.SPENDING_COLLECTION).add(spending);
+    this.firestore.collection(this.SPENDING_COLLECTION).add(spending);
   }
 
-  updatePeriod(spending: Spending) {
-    return this.firestore.doc(`${this.SPENDING_COLLECTION}/${spending.id}`).update(spending);
+  public updateSpending(spending: Spending) {
+    this.firestore.doc(`${this.SPENDING_COLLECTION}/${spending.id}`).update(spending);
   }
 
-  getSpendingByPeriodId(periodId: string) {
+  public deleteSpending(spending: Spending) {
+    this.firestore.doc(`${this.SPENDING_COLLECTION}/${spending.id}`).delete();
+  }
+
+  public getSpendingByPeriodId(periodId: string) {
     const periodDoc = this.periodRepository.periodDoc(periodId);
     return this.firestore
       .collection<Spending>(this.SPENDING_COLLECTION, ref => ref
         .where('period', '==', periodDoc)
-        .orderBy('paid', 'desc'))
+        .orderBy('paid', 'asc'))
       .snapshotChanges()
       .pipe(map(this.toSpending));
   }
 
-  toSpending(docs: DocumentChangeAction<Spending>[]): Spending[] {
+  private toSpending(docs: DocumentChangeAction<Spending>[]): Spending[] {
     return docs.map(doc => ({
-      id: doc.payload.doc.id,
       ...doc.payload.doc.data(),
+      id: doc.payload.doc.id,
     }) as Spending);
   }
 }

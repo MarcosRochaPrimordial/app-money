@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
     this.userStorage.currency = this.form.get('currency')?.value;
     this.userStorage.language = this.form.get('language')?.value;
     this.userRepository.updateUser(this.userStorage.user);
-    this.router.navigate(['../']);
+    window.location.reload();
   }
 
 }

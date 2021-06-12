@@ -36,14 +36,18 @@ export class PeriodRepositoryService {
       .pipe(map(this.toPeriod));
   }
 
+  deletePeriod(period: Period) {
+    return this.firestore.doc(`${this.PERIOD_COLLECTION}/${period.id}`).delete();
+  }
+
   periodDoc(periodId: string) {
     return this.firestore.collection<Period>(this.PERIOD_COLLECTION).doc(periodId).ref;
   }
 
   toPeriod(docs: DocumentChangeAction<PeriodBase>[]): Period[] {
     return docs.map(doc => ({
-      id: doc.payload.doc.id,
       ...doc.payload.doc.data(),
+      id: doc.payload.doc.id,
       startDate: doc.payload.doc.data().startDate.toDate(),
       endDate: doc.payload.doc.data().endDate.toDate()
     }) as Period);

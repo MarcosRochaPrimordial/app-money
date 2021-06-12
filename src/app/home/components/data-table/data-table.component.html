@@ -1,11 +1,11 @@
 <div class="flex flex-column fixed-spendings">
     <div class="table-wrapper">
-        <mat-table [dataSource]="dataSource">
+        <mat-table [dataSource]="dataSource" *ngIf="!!dataSource.data.length">
 
             <ng-container matColumnDef="checkbox">
                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox (change)="markAsPaid($event, element)" [checked]="element.paid"></mat-checkbox>
                 </mat-cell>
             </ng-container>
 
@@ -27,7 +27,7 @@
                     <button mat-button (click)="editCurrent(element)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-button (click)="deleteElement(element.id)">
+                    <button mat-button (click)="deleteElement(element)">
                         <mat-icon>delete</mat-icon>
                     </button>
                     <button mat-button (click)="copyCurrent(element)">
@@ -38,12 +38,15 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
 
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [class.paid]="row.paid"></mat-row>
         </mat-table>
+        <div *ngIf="!dataSource.data.length" class="no-data">
+            <span class="font-ubuntu">{{ 'no_data' | translate }}</span>
+        </div>
     </div>
     <div class="flex font-ubuntu footer">
         <div class="flex-1 total"><span class="bold">{{ 'total_colon' | translate }}</span> {{
-            currencyService.currencyType }}3850,00</div>
+            currencyService.currencyType }}{{ _total }}</div>
         <div class="flex-1">
             <mat-paginator #paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
         </div>

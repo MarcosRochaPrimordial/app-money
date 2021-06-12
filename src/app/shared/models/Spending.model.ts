@@ -7,4 +7,5 @@ export interface Spending {
     importance: number;
     paid: boolean;
     period: DocumentReference<Period>;
+    type: string;
 }

@@ -21,7 +21,7 @@
                 <mat-form-field appearance="outline" class="form-width" color="accent"
                     matTooltip="{{ 'net_importance' | translate }}" matTooltipPosition="above">
                     <mat-label>{{ 'importance' | translate }}</mat-label>
-                    <input matInput formControlName="importance" mask="0*,00">
+                    <input matInput formControlName="importance">
                     <mat-hint *ngIf="importance?.hasError('required') && importance?.touched" class="warn">
                         {{ 'importance_required' | translate }}
                     </mat-hint>

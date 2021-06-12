@@ -15,6 +15,10 @@ export class CurrencyService {
     return decimal.toString().replace('.', ',');
   }
 
+  liveTransform(value: string): string {
+    return value.replace(/\D/g, '').replace(/^(\d*)(\d{2})/g, "$1,$2");
+  }
+
   get currencyType() {
     return `${this.userStorage.user.currency} `;
   }

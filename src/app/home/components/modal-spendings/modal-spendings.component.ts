@@ -38,6 +38,9 @@ export class ModalSpendingsComponent implements OnInit {
       importance: [null, Validators.required],
       description: ['', Validators.required],
     });
+    this.importance?.valueChanges.subscribe(value => {
+      this.importance?.setValue(this.currencyService.liveTransform(value), { emitEvent: false });
+    });
   }
 
   get id() {
@@ -49,7 +52,7 @@ export class ModalSpendingsComponent implements OnInit {
   }
 
   get importance() {
-    return this.form.get('value');
+    return this.form.get('importance');
   }
 
   get description() {
@@ -57,14 +60,23 @@ export class ModalSpendingsComponent implements OnInit {
   }
 
   saveSpending() {
-    const form = this.form.getRawValue() as Spending;
-    form.paid = false;
+    const form = this.formatForm();
     if (!!this.id?.value) {
-      this.spendingRepository.updatePeriod(form);
+      this.spendingRepository.updateSpending(form);
     } else {
-      this.spendingRepository.createPeriod(form, this.data.periodId);
+      delete form.id;
+      this.spendingRepository.createSpending(form, this.data.periodId);
     }
     this.dialogRef.close();
+  }
+
+  formatForm(): Spending {
+    const form = this.form.getRawValue();
+    return {
+      ...form,
+      paid: false,
+      importance: parseInt(form.importance.replace(',', '')),
+    } as Spending;
   }
 
 }

@@ -3,13 +3,13 @@
         <mat-expansion-panel-header>
             <div class="period-info font-ubuntu">
                 <div class="info-item">
-                    {{ currencyService.currencyType }} 240,00
+                    {{ currencyService.currencyType }} {{ budget }}
                     <div class="info-item-label">
                         {{ 'budget' | translate }}
                     </div>
                 </div>
                 <div class="info-item">
-                    {{ currencyService.currencyType }} 240,00
+                    {{ currencyService.currencyType }} {{ remaining }}
                     <div class="info-item-label">
                         {{ 'remaining' | translate }}
                     </div>
@@ -22,13 +22,13 @@
                 <span class="detached-item-label">{{ 'savings' | translate }}</span>
             </div>
             <div class="detached-item">
-                {{ currencyService.currencyType }} 63,00
+                {{ currencyService.currencyType }} {{ savings }}
             </div>
             <div class="detached-item mt-10">
                 <span class="detached-item-label">{{ 'final_budget' | translate }}</span>
             </div>
             <div class="detached-item">
-                {{ currencyService.currencyType }} 180,00
+                {{ currencyService.currencyType }} {{ finalBudget }}
             </div>
         </div>
     </mat-expansion-panel>

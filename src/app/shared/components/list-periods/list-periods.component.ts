@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PeriodRepositoryService } from 'src/app/core/repositories/period-repository.service';
+import { ActualPeriodService } from 'src/app/core/services/actual-period.service';
 
 import { Period } from '../../models/Period.model';
 import { CurrencyService } from '../../services/currency.service';
@@ -14,12 +15,13 @@ import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component'
 })
 export class ListPeriodsComponent implements OnInit {
 
-  active = null;
+  active: string = '';
   periods: Period[] = [];
 
   constructor(
     private modal: MatDialog,
     private periodRepository: PeriodRepositoryService,
+    private actualPeriodService: ActualPeriodService,
     private userStorage: UserStorageService,
     public currencyService: CurrencyService,
   ) { }
@@ -29,7 +31,17 @@ export class ListPeriodsComponent implements OnInit {
       .getPeriodsByUserId(this.userStorage.user.id!)
       .subscribe((periods: Period[]) => {
         this.periods = periods;
+        this.selectPeroidBasedOnToday();
       });
+  }
+
+  selectPeroidBasedOnToday() {
+    let today = new Date();
+    this.periods.forEach(period => {
+      if (today <= period.endDate && today >= period.startDate) {
+        this.openPeriod(period);
+      }
+    });
   }
 
   openModalAddPeriod(period?: Period) {
@@ -37,6 +49,15 @@ export class ListPeriodsComponent implements OnInit {
       width: '450px',
       data: period,
     });
+  }
+
+  deletePeriod(period: Period) {
+    this.periodRepository.deletePeriod(period);
+  }
+
+  openPeriod(period: Period) {
+    this.active = period.id!;
+    this.actualPeriodService.selectPeriod(period);
   }
 
 }
