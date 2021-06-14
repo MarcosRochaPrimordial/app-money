@@ -32,16 +32,18 @@ export class PeriodInfoComponent implements OnInit {
   }
 
   calculateBudget(periodId: string, periodImportance: number) {
-    combineLatest([
-      this.spendingService.getTotalFixedSpendings(periodId),
-      this.spendingService.getTotalOutgoings(periodId),
-      this.spendingService.getTotalIncomes(periodId),
-    ]).subscribe(([fixeds, outgoings, incomes]) => {
-      const { budget, savings, finalBudget } = this.spendingService.calculateValues(fixeds, outgoings, incomes, periodImportance);
-      this.budget = budget;
-      this.savings = savings;
-      this.finalBudget = finalBudget;
-    });
+    if (!!periodId && !!periodImportance) {
+      combineLatest([
+        this.spendingService.getTotalFixedSpendings(periodId),
+        this.spendingService.getTotalOutgoings(periodId),
+        this.spendingService.getTotalIncomes(periodId),
+      ]).subscribe(([fixeds, outgoings, incomes]) => {
+        const { budget, savings, finalBudget } = this.spendingService.calculateValues(fixeds, outgoings, incomes, periodImportance);
+        this.budget = budget;
+        this.savings = savings;
+        this.finalBudget = finalBudget;
+      });
+    }
   }
 
   calculateLastPeriodFinalBudget(period: Period) {
