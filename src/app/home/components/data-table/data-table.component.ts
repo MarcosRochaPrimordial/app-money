@@ -2,10 +2,9 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SpendingRepositoryService } from 'src/app/core/repositories/spending-repository.service';
-import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
+import { SpendingService } from 'src/app/core/services/spending.service';
+import { ConfirmService } from 'src/app/shared/services/confirm.service';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
-import { TranslateService } from 'src/app/shared/services/translate.service';
 import { ModalCopyComponent } from '../modal-copy/modal-copy.component';
 import { ModalSpendingsComponent } from '../modal-spendings/modal-spendings.component';
 import { Spending } from './../../../shared/models/Spending.model';
@@ -34,8 +33,8 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   constructor(
     public currencyService: CurrencyService,
     private modal: MatDialog,
-    private translateService: TranslateService,
-    private spendingRepository: SpendingRepositoryService,
+    private spendingService: SpendingService,
+    private confirm: ConfirmService,
   ) { }
 
   ngOnInit(): void {
@@ -63,26 +62,17 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteElement(spending: Spending) {
-    const dialogMessage = this.modal.open(ConfirmComponent, {
-      width: '450px',
-      data: {
-        title: this.translateService.translate('are_you_sure_dot'),
-        message: this.translateService.translate('all_data_will_be_deleted'),
-        labelBtnLeft: this.translateService.translate('yes'),
-        labelBtnRight: this.translateService.translate('no'),
-      }
-    });
-
-    dialogMessage.afterClosed().subscribe(result => {
+    this.confirm.confirm();
+    this.confirm.dialog.afterClosed().subscribe(result => {
       if (result) {
-        this.spendingRepository.deleteSpending(spending);
+        this.spendingService.deleteSpending(spending);
       }
     });
   }
 
   markAsPaid(event: any, spending: Spending) {
     spending.paid = event.checked;
-    this.spendingRepository.updateSpending(spending);
+    this.spendingService.updateSpending(spending);
   }
 
 }

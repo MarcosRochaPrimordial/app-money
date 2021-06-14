@@ -1,5 +1,16 @@
-mat-form-field {
-    font-size: 7pt;
-    width: 80px;
-    margin-left: 10px;
+@import './../../../../style-variables.scss';
+
+.button-menu {
+    margin-right: 10px;
+}
+
+.app-name {
+    text-decoration: none;
+    color: $accent;
+}
+
+@media (min-width: 1000px) {
+    .button-menu {
+        display: none;
+    }
 }

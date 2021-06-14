@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { UserStorageService } from 'src/app/shared/services/user-storage.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { UserStorageService } from 'src/app/core/services/user-storage.service';
 
 @Component({
   selector: 'app-user',

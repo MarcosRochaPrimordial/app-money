@@ -1,6 +1,7 @@
 <div class="flex flex-column modal">
     <div class="form-modal-header">
         <h2 class="label font-ubuntu"> {{ (!id?.value ? 'add_period' : 'edit_period') | translate }} </h2>
+        <div class="spacer"></div>
         <button mat-mini-fab color="accent" class="close-button" (click)="dialogRef.close()">
             <mat-icon>
                 close

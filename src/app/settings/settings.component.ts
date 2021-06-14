@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserRepositoryService } from '../core/repositories/user-repository.service';
-import { UserStorageService } from '../shared/services/user-storage.service';
+import { AuthService } from '../core/services/auth.service';
+import { UserStorageService } from '../core/services/user-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,8 +15,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userStorage: UserStorageService,
-    private userRepository: UserRepositoryService,
-    private router: Router,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +32,7 @@ export class SettingsComponent implements OnInit {
   saveSettings() {
     this.userStorage.currency = this.form.get('currency')?.value;
     this.userStorage.language = this.form.get('language')?.value;
-    this.userRepository.updateUser(this.userStorage.user);
+    this.auth.updateUser(this.userStorage.user);
     window.location.reload();
   }
 

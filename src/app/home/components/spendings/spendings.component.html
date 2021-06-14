@@ -1,6 +1,6 @@
 <div class="spendings flex flex-column">
     <div class="tab">
-        <div class="flex-1 left-btns">
+        <div class="left-btns">
             <button class="font-ubuntu" #fixed_spendings_button (click)="openTab($event, 'fixed_spendings_view')">{{
                 'fixed_spendings' |
                 translate
@@ -11,8 +11,8 @@
                 translate
                 }}</button>
         </div>
-        <div class="flex flex-1 flex-end align-itens-center right-buttons">
-            <a class="pointer font-ubuntu" (click)="openSheetImport()">{{ 'import_sheet' | translate }}</a>
+        <div class="spacer"></div>
+        <div class="flex flex-end align-itens-center right-buttons">
             <button mat-mini-fab color="primary" (click)="openSpendingModal()">
                 <mat-icon>add</mat-icon>
             </button>

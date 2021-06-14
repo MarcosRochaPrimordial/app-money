@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PeriodRepositoryService } from 'src/app/core/repositories/period-repository.service';
+import { combineLatest } from 'rxjs';
 import { ActualPeriodService } from 'src/app/core/services/actual-period.service';
+import { PeriodService } from 'src/app/core/services/period.service';
 
 import { Period } from '../../models/Period.model';
+import { ConfirmService } from '../../services/confirm.service';
 import { CurrencyService } from '../../services/currency.service';
-import { UserStorageService } from '../../services/user-storage.service';
 import { ModalPeriodsComponent } from '../modal-periods/modal-periods.component';
 
 @Component({
@@ -20,19 +21,25 @@ export class ListPeriodsComponent implements OnInit {
 
   constructor(
     private modal: MatDialog,
-    private periodRepository: PeriodRepositoryService,
+    private periodService: PeriodService,
     private actualPeriodService: ActualPeriodService,
-    private userStorage: UserStorageService,
+    private confirm: ConfirmService,
     public currencyService: CurrencyService,
   ) { }
 
   ngOnInit(): void {
-    this.periodRepository
-      .getPeriodsByUserId(this.userStorage.user.id!)
-      .subscribe((periods: Period[]) => {
-        this.periods = periods;
+    combineLatest([
+      this.actualPeriodService.period,
+      this.periodService
+        .getPeriodsByUserId()
+    ]).subscribe(([period, periods]: [Period, Period[]]) => {
+      this.periods = periods;
+      if (!period.id) {
         this.selectPeroidBasedOnToday();
-      });
+      } else {
+        this.active = period.id;
+      }
+    });
   }
 
   selectPeroidBasedOnToday() {
@@ -52,7 +59,12 @@ export class ListPeriodsComponent implements OnInit {
   }
 
   deletePeriod(period: Period) {
-    this.periodRepository.deletePeriod(period);
+    this.confirm.confirm();
+    this.confirm.dialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.periodService.deletePeriod(period);
+      }
+    });
   }
 
   openPeriod(period: Period) {

@@ -1,6 +1,7 @@
 <mat-card class="card-user">
     <img class="img-user" [src]="userImageProfile">
     <span class="name-user font-ubuntu">{{ userNameProfile }}</span>
+    <div class="spacer"></div>
     <button mat-flat-button color="primary" matTooltip="{{ 'signout' | translate }}" (click)="signout()">
         <mat-icon>
             power_settings_new

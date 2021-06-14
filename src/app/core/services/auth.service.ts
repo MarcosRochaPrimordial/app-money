@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/User.model';
-import { UserRepositoryService } from '../../core/repositories/user-repository.service';
+import { User } from '../../shared/models/User.model';
+import { UserRepositoryService } from '../repositories/user-repository.service';
 import { UserStorageService } from './user-storage.service';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class AuthService {
     return this.userStorage.hasUser;
   }
 
-  signin() {
+  public signin() {
     this.loginWithGoogle();
     this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   private loginFirebase(googleId: string) {
-    const userByGoogleId = this.userRepository.getUserByGoogleId(googleId)
+    const userByGoogleId = this.userRepository.getByGoogleId(googleId)
       .subscribe((user: User) => {
         if (!user) {
           this.signup();
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   private signup() {
-    this.userRepository.createUser(this.userStorage.user);
+    this.userRepository.create(this.userStorage.user);
   }
 
   private enter() {
@@ -67,10 +67,14 @@ export class AuthService {
     this.loginSubject.next(true);
   }
 
-  singout() {
+  public singout() {
     this.socialService.signOut();
     this.loginSubject.next(false);
     this.userStorage.terminateUser();
     this.router.navigate(['login']);
+  }
+
+  public updateUser(user: User) {
+    this.userRepository.update(user);
   }
 }

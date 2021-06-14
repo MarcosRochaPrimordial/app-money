@@ -10,3 +10,9 @@
 .right {
     width: 100%;
 }
+
+@media (max-width: 1000px) {
+    .left {
+        margin-left: -350px;
+    }
+}

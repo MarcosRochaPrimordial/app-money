@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Period, PeriodBase } from 'src/app/shared/models/Period.model';
 import { UserRepositoryService } from './user-repository.service';
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,17 +17,21 @@ export class PeriodRepositoryService {
     private userRepository: UserRepositoryService,
   ) { }
 
-  createPeriod(period: Period, userId: string) {
-    period.user = this.userRepository.userDoc(userId);
-    return this.firestore.collection(this.PERIOD_COLLECTION).add(period);
+  public create(period: Period, userId: string): void {
+    period.user = this.userRepository.doc(userId);
+    this.firestore.collection(this.PERIOD_COLLECTION).add(period);
   }
 
-  updatePeriod(period: Period) {
-    return this.firestore.doc(`${this.PERIOD_COLLECTION}/${period.id}`).update(period);
+  public update(period: Period): void {
+    this.firestore.doc(`${this.PERIOD_COLLECTION}/${period.id}`).update(period);
   }
 
-  getPeriodsByUserId(userId: string) {
-    const userDoc = this.userRepository.userDoc(userId);
+  public delete(period: Period): void {
+    this.firestore.doc(`${this.PERIOD_COLLECTION}/${period.id}`).delete();
+  }
+
+  public getByUserId(userId: string): Observable<Period[]> {
+    const userDoc = this.userRepository.doc(userId);
     return this.firestore
       .collection<PeriodBase>(this.PERIOD_COLLECTION, ref => ref
         .where('user', '==', userDoc)
@@ -36,15 +40,11 @@ export class PeriodRepositoryService {
       .pipe(map(this.toPeriod));
   }
 
-  deletePeriod(period: Period) {
-    return this.firestore.doc(`${this.PERIOD_COLLECTION}/${period.id}`).delete();
-  }
-
-  periodDoc(periodId: string) {
+  public doc(periodId: string): DocumentReference<Period> {
     return this.firestore.collection<Period>(this.PERIOD_COLLECTION).doc(periodId).ref;
   }
 
-  toPeriod(docs: DocumentChangeAction<PeriodBase>[]): Period[] {
+  private toPeriod(docs: DocumentChangeAction<PeriodBase>[]): Period[] {
     return docs.map(doc => ({
       ...doc.payload.doc.data(),
       id: doc.payload.doc.id,

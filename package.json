@@ -1,6 +1,6 @@
 {
   "name": "app-money",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -26,7 +26,6 @@
     "angularx-social-login": "^3.5.7",
     "apexcharts": "^3.26.3",
     "firebase": "^8.6.5",
-    "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.1.0",
     "zone.js": "~0.11.4"

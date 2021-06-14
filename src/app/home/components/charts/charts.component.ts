@@ -22,9 +22,6 @@ export class ChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.budgetChartOptions = {
-      // colors: [],
-      // labels: [],
-      // responsive: [],
       series: [
         {
           name: this.translateService.translate('budget'),
@@ -33,7 +30,7 @@ export class ChartsComponent implements OnInit {
       ],
       chart: {
         height: 285,
-        type: "bar",
+        type: 'bar',
       },
       title: {
         text: this.translateService.translate('strategic_vision'),
@@ -45,15 +42,16 @@ export class ChartsComponent implements OnInit {
       plotOptions: {
         bar: {
           dataLabels: {
-            position: "top"
+            position: 'top',
+            orientation: 'vertical',
           }
         }
       },
       dataLabels: {
         enabled: true,
         style: {
-          fontSize: "12px",
-          colors: ["#304758"]
+          fontSize: '12px',
+          colors: ['#304758']
         },
         offsetY: -20,
         formatter: (value: number) => {
@@ -62,7 +60,7 @@ export class ChartsComponent implements OnInit {
         },
       }
     };
-    this.chart = new ApexCharts(document.querySelector("#budgetChart"), this.budgetChartOptions);
+    this.chart = new ApexCharts(document.querySelector('#budgetChart'), this.budgetChartOptions);
     this.chart.render();
     this.getTotalBudgets();
   }

@@ -3,7 +3,6 @@ import { combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Spending } from 'src/app/shared/models/Spending.model';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
-import { UserStorageService } from 'src/app/shared/services/user-storage.service';
 import { SpendingRepositoryService } from '../repositories/spending-repository.service';
 import { PeriodService } from './period.service';
 
@@ -15,24 +14,23 @@ export class SpendingService {
   constructor(
     private spendingRepository: SpendingRepositoryService,
     private periodService: PeriodService,
-    private userStorage: UserStorageService,
     private currencyService: CurrencyService,
   ) { }
 
   public createSpending(spending: Spending, periodId: string) {
-    this.spendingRepository.createSpending(spending, periodId);
+    this.spendingRepository.create(spending, periodId);
   }
 
   public updateSpending(spending: Spending) {
-    this.spendingRepository.updateSpending(spending);
+    this.spendingRepository.update(spending);
   }
 
   public deleteSpending(spending: Spending) {
-    this.spendingRepository.deleteSpending(spending);
+    this.spendingRepository.delete(spending);
   }
 
   public getFixedSpendings(periodId: string) {
-    return this.spendingRepository.getSpendingByPeriodId(periodId)
+    return this.spendingRepository.getByPeriodId(periodId)
       .pipe(map(val => val.filter(value => value.type === 'fixed_spendings')));
   }
 
@@ -42,7 +40,7 @@ export class SpendingService {
   }
 
   public getOutgoings(periodId: string) {
-    return this.spendingRepository.getSpendingByPeriodId(periodId)
+    return this.spendingRepository.getByPeriodId(periodId)
       .pipe(map(val => val.filter(value => value.type === 'outgoings')));
   }
 
@@ -52,7 +50,7 @@ export class SpendingService {
   }
 
   public getIncomes(periodId: string) {
-    return this.spendingRepository.getSpendingByPeriodId(periodId)
+    return this.spendingRepository.getByPeriodId(periodId)
       .pipe(map(val => val.filter(value => value.type === 'incomes')));
   }
 
@@ -62,7 +60,7 @@ export class SpendingService {
   }
 
   public getSpendingsLastPeriod(date: Date) {
-    return this.periodService.getPeriodBeforeDate(date, this.userStorage.user.id!)
+    return this.periodService.getPeriodBeforeDate(date)
       .pipe(map(val => {
         if (!!val) {
           return combineLatest([
@@ -78,7 +76,7 @@ export class SpendingService {
 
   public getSpendingsNextPeriods(date: Date, qtPeriods: number) {
     return this.periodService
-      .getPeriodsAfterDate(date, qtPeriods, this.userStorage.user.id!)
+      .getPeriodsAfterDate(date, qtPeriods)
       .pipe(map(val => {
         if (!!val && !!val.length) {
           return val.map(value => {

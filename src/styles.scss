@@ -76,10 +76,6 @@ body { margin: 0; }
   flex-direction: column;
 }
 
-.flex-1 {
-  flex: 1;
-}
-
 .spacer {
   flex: 1 1 auto;
 }
@@ -107,11 +103,9 @@ body { margin: 0; }
     display: flex;
     width: 100%;
     .label {
-        flex: 9;
         margin: auto;
     }
     .close-button {
-        flex: 1;
         margin: auto;
     }
   }

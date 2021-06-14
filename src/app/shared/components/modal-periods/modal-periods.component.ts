@@ -1,10 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PeriodRepositoryService } from 'src/app/core/repositories/period-repository.service';
-import { Period, PeriodBase } from '../../models/Period.model';
+import { PeriodService } from 'src/app/core/services/period.service';
+import { Period } from '../../models/Period.model';
 import { CurrencyService } from '../../services/currency.service';
-import { UserStorageService } from '../../services/user-storage.service';
 
 @Component({
   selector: 'app-modal-periods',
@@ -17,8 +16,7 @@ export class ModalPeriodsComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private periodRepository: PeriodRepositoryService,
-    private userStorage: UserStorageService,
+    private periodService: PeriodService,
     public currencyService: CurrencyService,
     public dialogRef: MatDialogRef<ModalPeriodsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Period,
@@ -67,10 +65,10 @@ export class ModalPeriodsComponent implements OnInit {
   savePeriod() {
     const form = this.formatForm();
     if (!!this.id?.value) {
-      this.periodRepository.updatePeriod(form);
+      this.periodService.updatePeriod(form);
     } else {
       delete form.id;
-      this.periodRepository.createPeriod(form, this.userStorage.user.id!);
+      this.periodService.createPeriod(form);
     }
     this.dialogRef.close();
   }

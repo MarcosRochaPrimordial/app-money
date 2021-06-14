@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Spending } from 'src/app/shared/models/Spending.model';
 import { PeriodRepositoryService } from './period-repository.service';
@@ -16,21 +17,21 @@ export class SpendingRepositoryService {
     private periodRepository: PeriodRepositoryService,
   ) { }
 
-  public createSpending(spending: Spending, periodId: string) {
-    spending.period = this.periodRepository.periodDoc(periodId);
+  public create(spending: Spending, periodId: string): void {
+    spending.period = this.periodRepository.doc(periodId);
     this.firestore.collection(this.SPENDING_COLLECTION).add(spending);
   }
 
-  public updateSpending(spending: Spending) {
+  public update(spending: Spending): void {
     this.firestore.doc(`${this.SPENDING_COLLECTION}/${spending.id}`).update(spending);
   }
 
-  public deleteSpending(spending: Spending) {
+  public delete(spending: Spending): void {
     this.firestore.doc(`${this.SPENDING_COLLECTION}/${spending.id}`).delete();
   }
 
-  public getSpendingByPeriodId(periodId: string) {
-    const periodDoc = this.periodRepository.periodDoc(periodId);
+  public getByPeriodId(periodId: string): Observable<Spending[]> {
+    const periodDoc = this.periodRepository.doc(periodId);
     return this.firestore
       .collection<Spending>(this.SPENDING_COLLECTION, ref => ref
         .where('period', '==', periodDoc)
