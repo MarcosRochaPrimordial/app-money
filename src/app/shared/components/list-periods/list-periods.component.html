@@ -12,20 +12,20 @@
             <div *ngIf="!periods.length" class="no-data">
                 <span class="font-ubuntu">{{ 'no_data' | translate }}</span>
             </div>
-            <mat-list-item class="period-item" *ngFor="let period of periods; let i = index"
+            <mat-list-item class="period-item pointer" *ngFor="let period of periods; let i = index"
                 matTooltip="{{ period.startDate | date:'dd/MM/yyyy' }} - {{ period.endDate | date:'dd/MM/yyyy'}}"
-                [class.period-item-active]="active === period.id">
+                [class.period-item-active]="active === period.id" (click)="openPeriod(period)">
                 <div class="period-item-content font-ubuntu">
-                    <mat-icon class="item-icon list-icon pointer" (click)="openModalAddPeriod(period)">edit</mat-icon>
-                    <mat-icon class="item-icon list-icon pointer" (click)="deletePeriod(period)">delete</mat-icon>
+                    <mat-icon class="item-icon list-icon cursor"
+                        (click)="openModalAddPeriod(period); $event.stopPropagation();">edit</mat-icon>
+                    <mat-icon class="item-icon list-icon cursor"
+                        (click)="deletePeriod(period); $event.stopPropagation();">delete</mat-icon>
                     <span class="font-period-item item-content-item item-name">
                         {{ period.name }}
                     </span>
                     <span class="font-period-item item-content-item item-budget">
                         {{ currencyService.currencyType }}{{ period.importance | currency }}
                     </span>
-                    <mat-icon class="item-icon list-icon pointer" (click)="openPeriod(period)">subdirectory_arrow_right
-                    </mat-icon>
                 </div>
             </mat-list-item>
         </mat-list>

@@ -11,11 +11,20 @@ export class PeriodService {
     private periodRepository: PeriodRepositoryService,
   ) { }
 
-  getPeriodBeforeDate(date: Date, userId: string) {
+  public getPeriodBeforeDate(date: Date, userId: string) {
     return this.periodRepository.getPeriodsByUserId(userId)
       .pipe(map(val => {
         const periodsBefore = val.filter(value => value.endDate < date);
         return periodsBefore[(periodsBefore.length - 1)];
+      }));
+  }
+
+  public getPeriodsAfterDate(date: Date, qtPeriods: number, userId: string) {
+    return this.periodRepository.getPeriodsByUserId(userId)
+      .pipe(map(val => {
+        return val
+          .filter(value => value.startDate >= date)
+          .slice(0, qtPeriods);
       }));
   }
 }

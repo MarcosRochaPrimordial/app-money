@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import * as ApexCharts from 'apexcharts';
+import { SpendingService } from 'src/app/core/services/spending.service';
+import { Period } from 'src/app/shared/models/Period.model';
 import { CurrencyService } from 'src/app/shared/services/currency.service';
 import { TranslateService } from 'src/app/shared/services/translate.service';
 
@@ -9,20 +12,23 @@ import { TranslateService } from 'src/app/shared/services/translate.service';
 })
 export class ChartsComponent implements OnInit {
   public budgetChartOptions: any;
+  private chart: any;
 
   constructor(
     private translateService: TranslateService,
     private currencyService: CurrencyService,
-  ) {
+    private spendingService: SpendingService,
+  ) { }
+
+  ngOnInit(): void {
     this.budgetChartOptions = {
+      // colors: [],
+      // labels: [],
+      // responsive: [],
       series: [
         {
           name: this.translateService.translate('budget'),
-          data: [1.1, 3, 3.1, 4, 4.1, 4.9],
-        },
-        {
-          name: this.translateService.translate('total_spendings'),
-          data: [10, 41, 35, 51, 49, 62],
+          data: [],
         },
       ],
       chart: {
@@ -33,8 +39,9 @@ export class ChartsComponent implements OnInit {
         text: this.translateService.translate('strategic_vision'),
       },
       xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        categories: []
       },
+
       plotOptions: {
         bar: {
           dataLabels: {
@@ -55,9 +62,25 @@ export class ChartsComponent implements OnInit {
         },
       }
     };
+    this.chart = new ApexCharts(document.querySelector("#budgetChart"), this.budgetChartOptions);
+    this.chart.render();
+    this.getTotalBudgets();
   }
 
-  ngOnInit(): void {
+  private getTotalBudgets() {
+    this.spendingService.getSpendingsNextPeriods(new Date(), 6)
+      .subscribe(nextPeriods => {
+        this.budgetChartOptions.xaxis.categories = [];
+        this.budgetChartOptions.series[0].data = [];
+        nextPeriods.forEach((subscriber: any) => {
+          subscriber
+            .subscribe(([fixeds, outgoings, incomes, period]: [number, number, number, Period]) => {
+              const { budget } = this.spendingService.calculateValues(fixeds, outgoings, incomes, period.importance);
+              this.budgetChartOptions.xaxis.categories.push(period.name);
+              this.budgetChartOptions.series[0].data.push(budget);
+              this.chart.updateOptions(this.budgetChartOptions);
+            });
+        });
+      });
   }
-
 }

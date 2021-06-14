@@ -27,6 +27,7 @@ export class SpendingsComponent implements OnInit {
   public incomes: Spending[] = [];
   public totalIncomes: number = 0;
   public periodId: string = '';
+  private tabActive: string = '';
 
   constructor(
     private modal: MatDialog,
@@ -37,6 +38,7 @@ export class SpendingsComponent implements OnInit {
   ngOnInit(): void {
     this.fixed_spendings_view.nativeElement.style.display = "block";
     this.fixed_spendings_button.nativeElement.className += " active";
+    this.tabActive = 'fixed_spendings';
     this.actualPeriodService.period.subscribe(period => {
       this.periodId = period.id!;
       this.loadFixedSpendings();
@@ -87,12 +89,15 @@ export class SpendingsComponent implements OnInit {
     switch (tab) {
       case 'fixed_spendings_view':
         this.fixed_spendings_view.nativeElement.style.display = "block";
+        this.tabActive = 'fixed_spendings';
         break;
       case 'outgoings_view':
         this.outgoings_view.nativeElement.style.display = "block";
+        this.tabActive = 'outgoings';
         break;
       case 'incomes_view':
         this.incomes_view.nativeElement.style.display = "block";
+        this.tabActive = 'incomes';
         break;
     }
     evt.currentTarget.className += " active";
@@ -103,6 +108,7 @@ export class SpendingsComponent implements OnInit {
       width: '450px',
       data: {
         periodId: this.periodId,
+        type: this.tabActive,
       }
     });
   }

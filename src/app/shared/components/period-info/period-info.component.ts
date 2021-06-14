@@ -12,7 +12,6 @@ import { CurrencyService } from '../../services/currency.service';
 })
 export class PeriodInfoComponent implements OnInit {
 
-  date = new Date();
   budget: string = '0';
   savings: string = '0';
   finalBudget: string = '0';
@@ -38,7 +37,7 @@ export class PeriodInfoComponent implements OnInit {
       this.spendingService.getTotalOutgoings(periodId),
       this.spendingService.getTotalIncomes(periodId),
     ]).subscribe(([fixeds, outgoings, incomes]) => {
-      const { budget, savings, finalBudget } = this.calculateValues(fixeds, outgoings, incomes, periodImportance);
+      const { budget, savings, finalBudget } = this.spendingService.calculateValues(fixeds, outgoings, incomes, periodImportance);
       this.budget = budget;
       this.savings = savings;
       this.finalBudget = finalBudget;
@@ -50,22 +49,11 @@ export class PeriodInfoComponent implements OnInit {
       .subscribe(lastPeriodSpendingsSub => {
         if (!!lastPeriodSpendingsSub) {
           lastPeriodSpendingsSub.subscribe(([fixed, outgoings, incomes, periodImportance]) => {
-            const { finalBudget } = this.calculateValues(fixed, outgoings, incomes, periodImportance);
+            const { finalBudget } = this.spendingService.calculateValues(fixed, outgoings, incomes, periodImportance);
             this.remaining = finalBudget;
           });
         }
       });
-  }
-
-  private calculateValues(fixeds: number, outgoings: number, incomes: number, periodImportance: number): { budget: string, savings: string, finalBudget: string } {
-    const budget = ((periodImportance + incomes) - (fixeds + outgoings));
-    const savings = (budget * 0.3);
-    const finalBudget = (budget - savings);
-    return {
-      budget: this.currencyService.transform(budget),
-      savings: this.currencyService.transform(savings),
-      finalBudget: this.currencyService.transform(finalBudget),
-    }
   }
 
   private zeroValues() {
